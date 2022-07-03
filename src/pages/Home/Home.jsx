@@ -8,6 +8,7 @@ import ModalWrapper from '../../components/ModalWrapper/ModalWrapper.jsx'
 import usersAPI from '../../api/users.js'
 import { useEffect } from 'react'
 import InvitationModal from './Invitation.jsx'
+import SearchBar from './SearchBar.jsx'
 
 
 const Home = () => {
@@ -17,6 +18,8 @@ const Home = () => {
 
     // modalsStates
     const [showCreateRoomModal, setShowCreateRoomModal] = useState(false)
+
+    const [findNewFriendModal, setFindNewFriendModal] = useState({showModal: false, userId: ''})
 
     // useContext
     const { currentRoom } = useContext(currentRoomContext)
@@ -31,7 +34,6 @@ const Home = () => {
         currentActiveComponent.current = e.target
         currentActiveComponent.current.classList.add('active')
     }
-
 
     useEffect(() => {
         if(!userState) {
@@ -50,11 +52,7 @@ const Home = () => {
         <main id="home" className="container">
             <section className="sidebar">
 
-                <article className="search-bar-container">
-                    
-                    <input type="text" placeholder="Find a new friend" />
-                    <button className="submit-button">send</button>
-                </article>
+                <SearchBar />
 
                 <article className="sidebar-components-container">
                     
@@ -101,6 +99,9 @@ const Home = () => {
                 ? <ChatScreen />
                 : <div className="no-room"><span>Open room to start chatting</span></div>
             }
+
+
+            {/* ======  MODALS ====== */}
 
             {showCreateRoomModal &&
                 <ModalWrapper

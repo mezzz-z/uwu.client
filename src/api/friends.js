@@ -16,7 +16,7 @@ class Friends {
     }
 
     async sendFriendRequest(receiverId, accessToken){
-        return await this.axios.post(`/${receiverId}/sendRequest`, {
+        return await this.axios.post(`/${receiverId}/sendRequest`, {}, {
             headers: {
                 'authorization': 'Bearer ' + accessToken
             }

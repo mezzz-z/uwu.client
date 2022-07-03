@@ -254,6 +254,24 @@ input {
   left: 30px;
 }
 
+#home .sidebar .search-bar-container .modal-container {
+  position: absolute;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  font-weight: bold;
+}
+
+#home .sidebar .search-bar-container .modal-container.success {
+  color: #80fd80;
+}
+
 #home .sidebar .sidebar-components-container {
   background-color: white;
   height: 100%;

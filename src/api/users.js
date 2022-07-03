@@ -13,6 +13,10 @@ class Users {
             }
         })
     }
+
+    async getUser(filter) {
+        return await this.axios.get(`/${Object.keys(filter)[0]}/${Object.values(filter)[0]}`)
+    }
 }
 
 export default new Users()

@@ -48,8 +48,24 @@
                 position: absolute;
                 left: 30px;
             }
-        }
 
+            .modal-container {
+                position: absolute;
+                transform: translateY(-100%);
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: transparent;
+                justify-content: start;
+                font-weight: bold;
+
+                &.success {
+                    color: rgb(128, 253, 128)
+                }
+            }
+
+        }
+        
         .sidebar-components-container {
             background-color: white;
             height: 100%;
