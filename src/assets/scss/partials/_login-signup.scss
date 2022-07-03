@@ -1,0 +1,92 @@
+#login-signup {
+    padding: $general-padding;
+
+
+    .modal-container {
+        position: absolute;
+        left: 0;
+        top: -20px;
+        transform: translateY(-100%);
+    }
+
+    .form-container {
+        margin-top: 230px;
+        margin-inline: auto;
+        max-width: 400px;
+        position: relative;
+
+        form {
+            padding: 3vw;
+            background-color: $cl-secondary;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .form-item {
+                &.form-item-title {
+                    position: relative;
+                    bottom: 5px;
+                    .title {
+                        font-weight: 800;
+                        font-size: 1.2em;
+                        color: white;
+                    }
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+
+                &.form-item-field {
+                    label {
+                        font-size: .7em;
+                        letter-spacing: 1px;
+                        padding: 7px 3px;
+                    }
+
+                    input {
+                        font-size: .7em;
+                        font-weight: 500;
+                        padding: 4px 8px
+                    }
+
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                &.form-item-submit {
+                    margin-top: 30px;
+                    
+                    input{
+                        color: $cl-secondary;
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+                        background-color: $cl-secondary;
+                        padding: 10px 20px;
+                        width: 100%;
+                        color: white;
+                        font-size: .7em;
+                        font-weight: 600;
+                        transition: .3s;
+
+
+                        &:hover {
+                            background-color: rgb(52, 52, 52);
+                        }
+                    }
+                }
+
+                &.form-item-footer {
+                    font-size: .6em;
+                    span{
+                        color: rgba(255, 255, 255, 0.424)
+                    }
+                    a{
+                        color: rgba(255, 255, 255, 0.633);
+                        &:hover {
+                            color: white;
+                        }
+                    }
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}

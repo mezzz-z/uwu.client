@@ -1,0 +1,51 @@
+.invitation-modal-container {
+    width: 500px;
+    
+    display: flex;
+
+    .question-box {
+        background-color: $cl-custom-orange;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-inline-start: 60px;
+        gap: 10px;
+
+        .submit-buttons-wrapper {
+            display: flex;
+            justify-content: stretch;
+            gap: 10px;
+
+            button {
+                font-size: .6em;
+                padding: 4px 10px;
+                width: 100px;
+                border: none;
+                background-color: white;
+
+                &.accept {
+                    color: $cl-success;
+                }
+                &.reject {
+                    color: $cl-danger;
+                }
+            }
+        }
+    }
+
+    .invite-sender {
+        background-color: darken($cl-custom-orange, 10%);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        img {
+            width: 90px;
+            border-radius: 50%;
+        }
+    }
+   
+}

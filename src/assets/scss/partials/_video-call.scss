@@ -1,0 +1,92 @@
+#video-call {
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+    background-color: black;
+
+    display: grid;
+    place-items: center;
+
+    .current-user-video-input {
+        background-color: black;
+        width: 20vw;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100;
+    }
+
+    .peer-video-input {
+        width: 100%;
+        position: relative;
+    }
+
+    &::before {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        content: '';
+        background-color: rgb(77, 76, 76);
+        color: white;
+        display: grid;
+        visibility: hidden;
+        place-content: center;
+        left: 0;
+        top: 0;
+        z-index: -1;
+    }
+
+    &.loading {
+        &::before {
+            visibility: visible;
+            content: 'Waiting for user...';
+            z-index: 99;
+        }
+    }
+
+    &.validating {
+        &::before {
+            visibility: visible;
+            content: 'Loading...';
+            z-index: 999;
+        }
+    }
+
+    .action-bar {
+        position: fixed;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        .action {
+            width: 70px;
+            aspect-ratio: 1 / 1;
+            background-color: white;
+            border-radius: 50%;
+
+
+            &:not(:nth-child(3)) {
+                background-color: white;
+                &.de-active {
+                    background-color: rgba(255, 255, 255, 0.539);
+                }
+
+                &:disabled {
+                    background-color: rgba(252, 252, 252, 0.285);
+                }
+            }
+            &:nth-child(3) {
+                background-color: white;
+            }
+
+            svg {
+                transform: scale(.6);
+            }
+        }
+    }
+}

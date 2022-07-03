@@ -1,0 +1,67 @@
+@import 'config';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: $cl-bg;
+    overflow: hidden;
+}
+
+.not-button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+input[type="submit"],
+button {
+    cursor: pointer;
+    outline: none;
+
+    &:disabled {
+        cursor: default;
+    }
+}
+
+input {
+    outline: none;
+    color: black;
+}
+
+.float-corner {
+    position: absolute;
+    $default-space: 18px;
+    font-size: .8em;
+
+    &.float-corner-bottom-left {
+        bottom: $default-space;
+        left: $default-space;        
+    }
+    &.float-corner-bottom-right {
+        bottom: $default-space;
+        right: $default-space;        
+    }
+    &.float-corner-top-left {
+        top: $default-space;
+        left: $default-space;        
+    }
+    &.float-corner-top-right {
+        top: $default-space;
+        right: $default-space;        
+    }
+}
+
+// partials
+@import 'partials/login-signup';
+@import 'partials/modal';
+@import 'partials/home';
+@import 'partials/create-room';
+@import 'partials/video-call';
+@import 'partials/invitation-modal';
