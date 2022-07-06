@@ -6,6 +6,7 @@ class Auth {
         this.axios = axios.create({baseURL: (apiConfig.baseUrl + 'auth/')})
     }
 
+    
     login = async (username, password) => {
         return await this.axios.post('/login',
             {

@@ -1,7 +1,7 @@
 import { 
     SET_USER, SET_USER_FRIENDS,
     SET_USER_FRIEND_REQUESTS,
-    SET_VIDEO_CALL_TICKET, REMOVE_VIDEO_CALL_TICKET } from './user-actions'
+    NEW_USER_FRIEND_REQUEST } from './user-actions'
 
 
 
@@ -26,7 +26,13 @@ const userReducer = (state, action) => {
         case SET_USER_FRIEND_REQUESTS:
             return {
                 ...state,
-                friendRequests: action.payload.friendRequests
+                friendRequests: action.payload
+            }
+
+        case NEW_USER_FRIEND_REQUEST:
+            return {
+                ...state,
+                friendRequests: [...state.friendRequests, action.payload]
             }
 
         default:

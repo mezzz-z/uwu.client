@@ -9,7 +9,7 @@ const Rooms = ({setShowCreateRoomModal}) => {
     // useContext
     const { auth } = useContext(authContext)
     const { setCurrentRoom, currentRoom } = useContext(currentRoomContext)
-    const { socketState: {socket}, submitCurrentRoom } = useContext(socketContext)
+    const { socketState: {socket} } = useContext(socketContext)
 
 
     const joinRoom = async (roomId) => {
@@ -18,14 +18,14 @@ const Rooms = ({setShowCreateRoomModal}) => {
         try {
             const {data: { room }} = await roomsAPI.getRoom(roomId, auth.token)
             
-            submitCurrentRoom(
-                {
+            socket.emit('chat-room/submit-current-room', {
+                room: {
                     roomId: room.room_id,
                     usersIds: room.users_ids
                 },
-                auth.userId,
-                currentRoom?.room_id || null
-            )
+                userId: auth.userId,
+                lastRoomId: currentRoom?.room_id || null
+            })
 
             setCurrentRoom(room.messages, room.room_name, room.room_id, room.users_ids)
 

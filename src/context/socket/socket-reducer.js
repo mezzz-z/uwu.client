@@ -1,6 +1,6 @@
 import {
     CONNECTION_CREATED, SUBMIT_USER_ID,
-    SUBMIT_CURRENT_ROOM, EVENT_LISTENERS_CONFIGURED,
+    SUBMIT_CURRENT_ROOM,
     SET_INVITATION, CLEAR_INVITATION } from './socket-actions'
 
 
@@ -29,12 +29,6 @@ const socketReducer = (state, action) => {
                 ...state,
                 socket: action.payload,
                 isConnected: true
-            }
-
-        case EVENT_LISTENERS_CONFIGURED:
-            return {
-                ...state,
-                configured: true
             }
 
         case SET_INVITATION:

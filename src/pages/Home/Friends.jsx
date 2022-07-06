@@ -1,16 +1,18 @@
 import noProfileSrc from '../../assets/images/no-profile.png';
 import { useNavigate } from 'react-router-dom'
 import friendsAPI from '../../api/friends.js'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { userContext, authContext, socketContext } from '../../context/index.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const Friends = () => {
 
-    const { setVideoCallTicket, setFriends, userState: {friends, isFriendsLoading: isLoading} } = useContext(userContext)
+    const { setFriends, userState: { friends } } = useContext(userContext)
     const { auth } = useContext(authContext)
     const { socketState: {socket} } = useContext(socketContext)
     
+    const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate()
 
     const handleVideoCallInvitation = (friendId, friendStatus) => {
@@ -35,6 +37,7 @@ const Friends = () => {
         if(friends.length <= 0 && isLoading) {
             friendsAPI.getUserFriends(auth.token)
              .then(({data}) => {
+                setIsLoading(false)
                 setFriends(data.userFriends)
              })
              .catch(err => {

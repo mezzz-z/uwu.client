@@ -316,6 +316,7 @@ input {
       -ms-flex-align: center;
           align-items: center;
   color: black;
+  position: relative;
 }
 
 #home .sidebar .sidebar-components-container .nav-bar ul li button {
@@ -490,6 +491,66 @@ input {
   font-weight: 400;
   font-size: .5em;
   margin-left: 2px;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container {
+  background-color: #232323;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-block: 20px;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request {
+  padding: 20px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request img {
+  border-radius: 50%;
+  width: 60px;
+  margin-right: 20px;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .actions {
+  margin-left: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .actions button {
+  font-size: .6em;
+  width: 80px;
+  padding-block: 3px;
+  border-radius: 30px;
+  border: none;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .actions button.accept {
+  background-color: green;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .actions button.reject {
+  background-color: red;
 }
 
 #home .sidebar .setting-container {

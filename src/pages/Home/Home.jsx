@@ -1,4 +1,5 @@
 import Friends from './Friends.jsx'
+import FriendRequests from './FriendRequests'
 import Rooms from './Rooms.jsx'
 import ChatScreen from './ChatScreen.jsx'
 import { useState, useRef, useContext } from 'react'
@@ -19,12 +20,11 @@ const Home = () => {
     // modalsStates
     const [showCreateRoomModal, setShowCreateRoomModal] = useState(false)
 
-    const [findNewFriendModal, setFindNewFriendModal] = useState({showModal: false, userId: ''})
 
     // useContext
     const { currentRoom } = useContext(currentRoomContext)
-    const { setUser, userState } = useContext(userContext)
-    const { socketState, clearInvitation } = useContext(socketContext)
+    const { setUser, userState, setFriendRequests } = useContext(userContext)
+    const { socketState, clearInvitation, createInvitation, submitCurrentRoom } = useContext(socketContext)
     const { auth } = useContext(authContext)
 
     const toggleComponents = (e) => {
@@ -47,6 +47,23 @@ const Home = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [socketState.invitation])
+
+
+    // set socket event listeners
+    useEffect(() => {
+        const {socket} = socketState
+
+        socket.on('video-call/incoming-invite', ({senderId, invitationCode}) => {
+            createInvitation(senderId, invitationCode)
+        })
+
+        socket.on('chat-room/current-room-submitted', (room) => {
+            submitCurrentRoom()
+            console.log(`current room submitted, id(${room.roomId})`)
+        })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <main id="home" className="container">
@@ -75,11 +92,20 @@ const Home = () => {
                                     rooms
                                 </button>
                             </li>
+                            <li className="nav-item nav-item-friend-requests">
+                                <button 
+                                 onClick={toggleComponents}
+                                 data-component="friend_requests"
+                                 className="not-button">
+                                    friend requests
+                                </button>
+                            </li>
                         </ul>
                     </nav>
                 
                     {currentSidebarComponent === 'rooms' && <Rooms setShowCreateRoomModal={setShowCreateRoomModal} />}
                     {currentSidebarComponent === 'friends' && <Friends />}
+                    {currentSidebarComponent === 'friend_requests' && <FriendRequests/>}
 
                 </article>
 
@@ -124,7 +150,6 @@ const Home = () => {
                     
                 </ModalWrapper>
             }
-
         </main>
     )
 }

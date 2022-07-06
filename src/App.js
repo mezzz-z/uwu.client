@@ -7,25 +7,22 @@ import { socketContext } from './context/index'
 const App = () => {
 
   const { refreshToken, auth: {isRefreshing} } = useContext(authContext)
-  const { createConnection, socketState, configEventListeners } = useContext(socketContext)
+  const { createConnection, socketState } = useContext(socketContext)
 
   useEffect(() => {
     refreshToken()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    if(!socketState.isConnected){
-      createConnection('http://localhost:8080/')
-    } else {
-      configEventListeners()
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socketState.isConnected])
+  }, [])
+  
+  useEffect(() => {
+    if(socketState.isConnected) return
+    createConnection('http://localhost:8080/')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
 
   return (
-      isRefreshing || !socketState.isConnected || !socketState.configured
+      isRefreshing || !socketState.isConnected
         ? <h3>Loading...</h3>
         : <Router />
   )

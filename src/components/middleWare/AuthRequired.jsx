@@ -10,9 +10,17 @@ const AuthRequired = ({children}) => {
     const { socketState, submitUserId } = useContext(socketContext)
 
     useEffect(() => {
+
+        // submit user if he's not submitted
         if(isLoggedIn && !socketState.submittedList.userId) {
-            submitUserId(userId)
+            socketState.socket.emit('global/submit-user-id', userId)
+
+            socketState.socket.on('global/user-id-submitted', () => {
+                submitUserId()
+                console.log(`user submitted, id(${userId})`)
+            })
         }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

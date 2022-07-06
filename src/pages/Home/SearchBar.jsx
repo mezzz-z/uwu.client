@@ -1,32 +1,44 @@
 import { useState, useContext } from "react"
-import friendsAPI from '../../api/friends.js'
 import usersAPI from '../../api/users.js'
-import {authContext} from '../../context/index.js'
+import { authContext, socketContext } from '../../context/index.js'
 import useFormModal from '../../hooks/useFormModal'
 import FormModal from '../../components/FormModal'
+import { useEffect } from "react"
 
 const SearchBar = () => {
 
     const [username, setUsername] = useState('')
 
-    const { auth: {token} } = useContext(authContext)
-    const {modalState: modal, removeModal, setModal} = useFormModal()
+    const { auth: { token } } = useContext(authContext)
+    const { modalState: modal, removeModal, setModal } = useFormModal()
+    const { socketState: { socket } }  = useContext(socketContext)
 
 
     const sendFriendRequest = async () => {
         if(!username) return
 
+        
         try {
-            const { data: userData } = await usersAPI.getUser({username})
-            if(!userData) return
-            const { data: friendRequestResultData } = await friendsAPI.sendFriendRequest(userData.user.user_id, token)
-            setModal(friendRequestResultData.message, true)
+            const { data } = await usersAPI.getUser({username})
+            socket.emit('friends/send-friend-request', {receiverId: data.user.user_id, accessToken: token})
             
         } catch (err) {
             if(!err.response.data) return setModal(err.message, false)
             setModal(err.response.data.message, false)
         }
     }
+
+    useEffect(() => {
+        socket.on('friends/friend-request-sent', ({success, message}) => {
+            setModal(message, success)
+            
+        })
+
+        return () => {
+            socket.removeListener('friends/friend-request-sent')
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>
