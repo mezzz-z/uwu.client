@@ -58,9 +58,9 @@ const FriendRequests = () => {
     return (
         <section className="friend-requests-container">
             {isLoading
-                ? <h3>Loading...</h3>
+                ? <span>Loading...</span>
                 : friendRequests.length === 0
-                    ? <h3>You have no friends</h3>
+                    ? <h5 className="no-friend-requests">You have no Friend requests</h5>
                     : friendRequests.map(user => {
                         return (
                             <div key={user.user_id} className="friend-request">
