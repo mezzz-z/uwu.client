@@ -7,7 +7,7 @@ import noProfile from '../../assets/images/no-profile.png'
 // TODO: load more messages on firstMessage.current.scrollIntoView
 
 
-const ChatScreen = () => {
+const ChatRoom = () => {
 
     // useContext
     const { currentRoom, addNewMessage } = useContext(currentRoomContext)
@@ -91,4 +91,4 @@ const ChatScreen = () => {
     )
 }
 
-export default ChatScreen 
+export default ChatRoom 

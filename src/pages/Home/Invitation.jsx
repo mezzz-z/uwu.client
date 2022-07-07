@@ -6,7 +6,7 @@ import noProfile from '../../assets/images/no-profile.png'
 const Invitation = () => {
 
     const { socketState: { invitation, socket }, clearInvitation } = useContext(socketContext)
-    const { setVideoCallTicket, userState: { friends } } = useContext(userContext)
+    const { userState: { friends } } = useContext(userContext)
 
     
     const [ inviteSender, setInviteSender ] = useState({})

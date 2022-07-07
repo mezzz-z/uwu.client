@@ -108,6 +108,7 @@ const ModalWrapper = ({
             clearInterval(hideModalCountDownRef.current)
             clearTimeout(autoHideModalTimeoutRef.current)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

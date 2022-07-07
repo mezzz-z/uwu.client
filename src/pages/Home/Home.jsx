@@ -1,7 +1,7 @@
 import Friends from './Friends.jsx'
 import FriendRequests from './FriendRequests'
 import Rooms from './Rooms.jsx'
-import ChatScreen from './ChatScreen.jsx'
+import ChatRoom from './ChatRoom.jsx'
 import { useState, useRef, useContext } from 'react'
 import { currentRoomContext, socketContext, userContext, authContext } from '../../context/index.js'
 import CreateRoom from './CreateRoom.jsx'
@@ -122,7 +122,7 @@ const Home = () => {
             </section>
 
             {currentRoom.room_id && socketState.submittedList.currentRoom
-                ? <ChatScreen />
+                ? <ChatRoom />
                 : <div className="no-room"><span>Open room to start chatting</span></div>
             }
 
