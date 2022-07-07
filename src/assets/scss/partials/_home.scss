@@ -4,8 +4,7 @@
     height: 100vh;
     position: relative;
 
-    display: grid;
-    grid-template-columns: 4fr 9fr;
+    display: flex;
     gap: 3vw;
     
     $default-height: 85vh;
@@ -17,6 +16,7 @@
         gap: 30px;
         position: relative;
         height: $default-height;
+        min-width: 350px;
         
         
         .search-bar-container {
@@ -140,6 +140,7 @@
                     flex-direction: column;
                     gap: 20px;
                     padding-right: 20px;
+                    align-items: center;
 
                     .friend {
                         width: 100%;
@@ -330,6 +331,7 @@
         height: $default-height;
         background-color: #D9D9D9;
         display: grid;
+        width: 100%;
         place-items: center;
         span{color: black;}
 

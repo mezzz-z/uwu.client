@@ -1,17 +1,21 @@
 import noProfileSrc from '../../assets/images/no-profile.png';
 import { useNavigate } from 'react-router-dom'
 import friendsAPI from '../../api/friends.js'
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext, useRef } from 'react'
 import { userContext, authContext, socketContext } from '../../context/index.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const Friends = () => {
 
-    const { setFriends, userState: { friends } } = useContext(userContext)
+    const { 
+        setFriends,
+        addNewFriend,
+        setAwaitFriends,
+        updateFriendStatus,
+        userState: { friends, awaitFriends } } = useContext(userContext)
     const { auth } = useContext(authContext)
     const { socketState: {socket} } = useContext(socketContext)
-    
-    const [isLoading, setIsLoading] = useState(false)
+
 
     const navigate = useNavigate()
 
@@ -23,9 +27,7 @@ const Friends = () => {
         socket.emit('video-call/send-invite', {
             userId: friendId,
             invitationCode: videoCallRoomId
-        })
-
-        
+        })        
         socket.on('video-call/invitation-result', data => {
             if(data.success) return navigate(`/video-call/${videoCallRoomId}`)
             console.log('user is busy')
@@ -34,30 +36,27 @@ const Friends = () => {
 
     useEffect(() => {
 
-        if(friends.length <= 0 && isLoading) {
-            friendsAPI.getUserFriends(auth.token)
-             .then(({data}) => {
-                setIsLoading(false)
-                setFriends(data.userFriends)
-             })
-             .catch(err => {
-                console.log(err)
-             })
-        } else {
-            socket.on('global/friend-status-changed', ({userId, status}) => {
-                setFriends(friends.map(friend => {
-                    if(friend.user_id === userId){
-                        return {...friend, status: status}
-                    }
-                    return friend
-                }))
-            })
-        }
+        friendsAPI.getUserFriends(auth.token)
+         .then(({data}) => {
+             setAwaitFriends(false)
+             setFriends(data.userFriends)
+         })
+         .catch(err => {
+             console.log(err)
+         })
+
+        socket.on('global/friend-status-changed', ({userId, status}) => {
+            updateFriendStatus(userId, status)
+        })
+        socket.on('friends/incoming-friend-request-answer', ({accepted, answerSender}) => {
+            if(!accepted) return // you can do more thing in future
+            addNewFriend(answerSender)
+        })
 
         return () => {
             socket.removeListener('global/friend-status-changed')
+            socket.removeListener('friends/incoming-friend-request-answer')
         }
-
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [friends])
@@ -69,16 +68,15 @@ const Friends = () => {
                 <div className="friends-count-container">
                     <span>friends:</span>
                     <span className="count">{
-                        isLoading
+                        awaitFriends
                             ? 'Loading...'
                             : friends.length
                     }</span>
                 </div>
             </div>
 
-
             <div className="friends">
-                {isLoading 
+                {awaitFriends 
                     ?   <h3>Loading...</h3> 
                     :   friends.length <= 0
                             ? <h3>You have no friends</h3>

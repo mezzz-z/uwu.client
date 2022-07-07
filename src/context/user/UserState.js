@@ -1,7 +1,16 @@
 import UserContext from './user-context.js'
 import userReducer from './user-reducer.js'
 import { useReducer } from 'react'
-import { SET_USER, SET_USER_FRIENDS, SET_USER_FRIEND_REQUESTS,NEW_USER_FRIEND_REQUEST } from './user-actions'
+import { 
+    SET_USER,
+    SET_FRIENDS,
+    SET_FRIEND_REQUESTS,
+    ADD_NEW_FRIEND_REQUEST,
+    REMOVE_FRIEND_REQUEST,
+    ADD_NEW_FRIEND,
+    SET_AWAIT_FRIENDS,
+    UPDATE_FRIEND_STATUS
+ } from './user-actions'
 
 const UserState = (props) => {
 
@@ -12,19 +21,32 @@ const UserState = (props) => {
         friends: [],
         friendRequests: [],
         videoCallTicket: null,
+        awaitFriends: true
     })
     
 
     const setFriends = (friends) => {
-        dispatch({type: SET_USER_FRIENDS, payload: friends})
+        dispatch({type: SET_FRIENDS, payload: friends})
     }
 
     const setFriendRequests = (friendRequests) => {
-        dispatch({type: SET_USER_FRIEND_REQUESTS, payload: friendRequests})
+        dispatch({type: SET_FRIEND_REQUESTS, payload: friendRequests})
     }
 
-    const newFriendRequest = (friendRequests) => {
-        dispatch({type: NEW_USER_FRIEND_REQUEST, payload: friendRequests})
+    const addNewFriendRequest = (friendRequests) => {
+        dispatch({type: ADD_NEW_FRIEND_REQUEST, payload: friendRequests})
+    }
+    
+    const removeFriendRequest = (userId) => {
+        dispatch({type: REMOVE_FRIEND_REQUEST, payload: userId})
+    }
+
+    const addNewFriend = (user) => {
+        dispatch({type: ADD_NEW_FRIEND, payload: user})
+    }
+
+    const setAwaitFriends = (bool) => {
+        dispatch({type: SET_AWAIT_FRIENDS, payload: bool})
     }
 
     const setUser = (username, email, profilePicture) => {
@@ -35,13 +57,21 @@ const UserState = (props) => {
         }})
     }
 
+    const updateFriendStatus = (userId, status) => {
+        dispatch({type: UPDATE_FRIEND_STATUS, payload: {userId, status}})
+    }
+
     return (
         <UserContext.Provider value={{
             userState: state,
             setFriends,
             setUser,
             setFriendRequests,
-            newFriendRequest
+            addNewFriendRequest,
+            removeFriendRequest,
+            addNewFriend,
+            setAwaitFriends,
+            updateFriendStatus
         }}>
 
             {props.children}

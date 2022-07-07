@@ -7,13 +7,22 @@ const FriendRequests = () => {
 
     const { auth } = useContext(authContext)
     const { socketState: {socket} } = useContext(socketContext)
-    const { userState: { friendRequests }, setFriendRequests, newFriendRequest } = useContext(userContext)
+    const { 
+        userState: { friendRequests, awaitFriends },
+        setFriendRequests,
+        addNewFriendRequest,
+        addNewFriend,
+        removeFriendRequest} = useContext(userContext)
 
     const [isLoading, setIsLoading] = useState(true)
 
 
     const sendRequestAnswer = (accepted, targetId) => {
-        socket.emit('friends/send-friend-request-response', {accepted: accepted, reqReceiverId: targetId})
+        socket.emit('friends/send-friend-request-answer', {
+            accepted: accepted,
+            answerReceiverId: targetId,
+            accessToken: auth.token
+        })
     }
 
     useEffect(() => {
@@ -23,10 +32,25 @@ const FriendRequests = () => {
             setIsLoading(false)
 
             socket.on('friends/incoming-friend-request', ({ sender }) => {
-                newFriendRequest(sender)
-             })
-         }).catch(err => console.log(err))
+                addNewFriendRequest(sender)
+            })
+            socket.on('friends/friend-request-answer-sent', (payload) => {
+                if(!payload.success) return console.log(payload.message)
+                removeFriendRequest(payload.answerReceiver.user_id)
 
+                if(!payload.accepted) return
+                // if current user's friends is already fetched &&
+                // add answerReceiver data as a new friend
+                if(awaitFriends) return
+                addNewFriend(payload.answerReceiver)
+            })
+
+
+         }).catch(err => console.log(err))
+            return () => {
+                socket.removeListener('friends/incoming-friend-request')
+                socket.removeListener('friends/friend-request-answer-sent')
+            }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
