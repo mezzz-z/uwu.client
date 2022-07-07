@@ -54,7 +54,6 @@ const FriendRequests = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     
-
     return (
         <section className="friend-requests-container">
             {isLoading

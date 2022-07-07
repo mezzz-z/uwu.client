@@ -1,4 +1,4 @@
-# uwu_server
+# uwu_client
 UWU client-side
 
 ## what is UWU
