@@ -49,13 +49,13 @@ const ModalWrapper = ({
                         ...state.modalState,
                         left: "50%",
                         opacity: 1,
-                        zIndex: 999999,
+                        zIndex: 9999999,
                         transform: 'translate(-50%, -50%) scale(1)'
                     },
                     bodyCoverState: {
                         ...state.bodyCoverState,
                         opacity: 1,
-                        zIndex: '999'
+                        zIndex: 999999
                     }
                 }
             case 'modal-wrapper/hideModal':
