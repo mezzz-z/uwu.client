@@ -1,6 +1,6 @@
 
 import React, { useContext, useState } from 'react'
-import { userContext, authContext, socketContext } from '../../context/index'
+import { useUser, authContext, socketContext } from '../../context/index'
 import noProfileImg from '../../assets/images/no-profile.png'
 import useFormModal from '../../hooks/useFormModal.js'
 import roomsAPI from '../../api/rooms.js'
@@ -10,7 +10,7 @@ import modalWrapperContext from '../../components/ModalWrapper/context'
 const CreateRoom = () => {
 
     // useContext
-    const { userState: { friends } } = useContext(userContext)
+    const { userState: { friends } } = useUser()
     const { socketState: {socket} } = useContext(socketContext)
     const { auth } = useContext(authContext)
     const { hideModal } = useContext(modalWrapperContext)
