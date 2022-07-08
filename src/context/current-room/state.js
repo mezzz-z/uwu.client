@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import CurrentRoomContext from './current-room-context.js'
+import CurrentRoomContext from './context.js'
 
 const CurrentRoomState = (props) => {
 

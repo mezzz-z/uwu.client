@@ -1,10 +1,10 @@
-import { useState, useContext } from "react"
-import { authContext } from '../context/index'
+import { useState } from "react"
+import { useAuth } from '../context/index'
 
 const useFormModal = () => {
 
     const [ state, setState ] = useState({openModal: false, modalClassName: '', content: ''})
-    const { auth, setIsModalOpen } = useContext(authContext)
+    const { auth, setIsModalOpen } = useAuth()
 
     
     const setModal = (content, success) => {

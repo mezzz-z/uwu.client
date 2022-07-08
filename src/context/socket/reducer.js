@@ -1,7 +1,7 @@
 import {
     CONNECTION_CREATED, SUBMIT_USER_ID,
     SUBMIT_CURRENT_ROOM,
-    SET_INVITATION, CLEAR_INVITATION } from './socket-actions'
+    SET_INVITATION, CLEAR_INVITATION } from './actions'
 
 
 const socketReducer = (state, action) => {

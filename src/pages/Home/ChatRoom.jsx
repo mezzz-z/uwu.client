@@ -1,5 +1,5 @@
-import { useEffect, useContext, useState, useRef } from 'react'
-import { currentRoomContext, socketContext, authContext } from '../../context/index.js'
+import { useEffect, useState, useRef } from 'react'
+import { useSocket, useAuth, useCurrentRoom } from '../../context/index.js'
 import noProfile from '../../assets/images/no-profile.png'
 
 
@@ -10,9 +10,9 @@ import noProfile from '../../assets/images/no-profile.png'
 const ChatRoom = () => {
 
     // useContext
-    const { currentRoom, addNewMessage } = useContext(currentRoomContext)
-    const { auth } = useContext(authContext)
-    const { socketState: {socket} } = useContext(socketContext)
+    const { currentRoom, addNewMessage } = useCurrentRoom()
+    const { auth } = useAuth()
+    const { socketState: {socket} } = useSocket()
 
 
     const scrollSpan = useRef(null)

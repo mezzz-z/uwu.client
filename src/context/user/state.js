@@ -1,5 +1,5 @@
-import UserContext from './user-context.js'
-import userReducer from './user-reducer.js'
+import UserContext from './context.js'
+import userReducer from './reducer.js'
 import { useReducer } from 'react'
 import { 
     SET_USER,
@@ -10,7 +10,7 @@ import {
     ADD_NEW_FRIEND,
     SET_AWAIT_FRIENDS,
     UPDATE_FRIEND_STATUS
- } from './user-actions'
+ } from './actions'
 
 const UserState = (props) => {
 

@@ -1,7 +1,7 @@
-import AuthContext from './auth-context.js'
-import authReducer from './auth-reducer.js'
+import AuthContext from './context.js'
+import authReducer from './reducer.js'
 import { useReducer } from 'react'
-import {IS_REFRESHING, LOGGED_IN, LOGGED_OUT, IS_MODAL_OPEN} from './auth-actions'
+import {IS_REFRESHING, LOGGED_IN, LOGGED_OUT, IS_MODAL_OPEN} from './actions'
 import authAPI from '../../api/auth.js'
 
 const AuthState = (props) => {

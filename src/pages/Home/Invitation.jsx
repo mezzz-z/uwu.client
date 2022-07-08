@@ -1,12 +1,12 @@
-import { useEffect, useContext, useState } from 'react'
-import { socketContext, userContext } from '../../context/index.js'
+import { useEffect, useState } from 'react'
+import { useSocket, useUser } from '../../context/index.js'
 import { useNavigate } from 'react-router-dom'
 import noProfile from '../../assets/images/no-profile.png'
 
 const Invitation = () => {
 
-    const { socketState: { invitation, socket }, clearInvitation } = useContext(socketContext)
-    const { userState: { friends } } = useContext(userContext)
+    const { socketState: { invitation, socket }, clearInvitation } = useSocket()
+    const { userState: { friends } } = useUser()
 
     
     const [ inviteSender, setInviteSender ] = useState({})

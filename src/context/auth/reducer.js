@@ -1,4 +1,4 @@
-import { IS_REFRESHING, IS_MODAL_OPEN, LOGGED_IN, LOGGED_OUT } from './auth-actions'
+import { IS_REFRESHING, IS_MODAL_OPEN, LOGGED_IN, LOGGED_OUT } from './actions'
 
 
 

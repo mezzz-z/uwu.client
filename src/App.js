@@ -1,13 +1,12 @@
 import Router from './Router.js'
-import { useEffect, useContext } from 'react'
-import { authContext } from './context/index'
-import { socketContext } from './context/index'
+import { useEffect } from 'react'
+import { useSocket, useAuth } from './context/index'
 
 
 const App = () => {
 
-  const { refreshToken, auth: {isRefreshing} } = useContext(authContext)
-  const { createConnection, socketState } = useContext(socketContext)
+  const { refreshToken, auth: { isRefreshing } } = useAuth()
+  const { createConnection, socketState } = useSocket()
 
   useEffect(() => {
     refreshToken()

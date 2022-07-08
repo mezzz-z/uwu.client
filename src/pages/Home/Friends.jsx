@@ -1,20 +1,20 @@
 import noProfileSrc from '../../assets/images/no-profile.png';
 import { useNavigate } from 'react-router-dom'
 import friendsAPI from '../../api/friends.js'
-import { useEffect, useContext, useRef } from 'react'
-import { userContext, authContext, socketContext } from '../../context/index.js'
+import { useEffect } from 'react'
+import { useUser, useSocket, useAuth } from '../../context/index.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const Friends = () => {
 
+    const { auth } = useAuth
+    const { socketState: {socket} } = useSocket()
     const { 
         setFriends,
         addNewFriend,
         setAwaitFriends,
         updateFriendStatus,
-        userState: { friends, awaitFriends } } = useContext(userContext)
-    const { auth } = useContext(authContext)
-    const { socketState: {socket} } = useContext(socketContext)
+        userState: { friends, awaitFriends } } = useUser()
 
 
     const navigate = useNavigate()

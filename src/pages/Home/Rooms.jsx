@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
-import { authContext, currentRoomContext, socketContext } from '../../context/index.js'
+import { useEffect, useState } from 'react'
+import { useAuth, useCurrentRoom, useSocket } from '../../context/index.js'
 import roomsAPI from '../../api/rooms.js'
 
 const Rooms = ({setShowCreateRoomModal}) => {
@@ -7,9 +7,9 @@ const Rooms = ({setShowCreateRoomModal}) => {
     const [roomsState, setRoomsState] = useState({rooms: [], isLoading: true})
 
     // useContext
-    const { auth } = useContext(authContext)
-    const { setCurrentRoom, currentRoom } = useContext(currentRoomContext)
-    const { socketState: {socket} } = useContext(socketContext)
+    const { auth } = useAuth
+    const { setCurrentRoom, currentRoom } = useCurrentRoom()
+    const { socketState: { socket } } = useSocket()
 
 
     const joinRoom = async (roomId) => {

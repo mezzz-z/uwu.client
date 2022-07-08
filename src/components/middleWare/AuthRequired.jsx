@@ -1,13 +1,13 @@
-import { authContext, socketContext } from '../../context/index'
+import { useEffect } from 'react'
+import { useAuth, useSocket } from '../../context/index'
 import { Navigate } from  'react-router-dom'
-import { useContext, useEffect } from 'react'
 
 
 
 const AuthRequired = ({children}) => {
 
-    const { auth: { isLoggedIn, userId } } = useContext(authContext)
-    const { socketState, submitUserId } = useContext(socketContext)
+    const { auth: { isLoggedIn, userId } } = useAuth()
+    const { socketState, submitUserId } = useSocket()
 
     useEffect(() => {
 

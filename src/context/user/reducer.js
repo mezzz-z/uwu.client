@@ -8,7 +8,7 @@ import {
     REMOVE_FRIEND,
     SET_AWAIT_FRIENDS,
     UPDATE_FRIEND_STATUS
- } from './user-actions'
+ } from './actions'
 
 
 

@@ -1,18 +1,18 @@
-import { useEffect, useContext, useState } from 'react'
-import { authContext, userContext, socketContext } from '../../context/index.js'
+import { useEffect, useState } from 'react'
+import { useAuth, useUser, useSocket } from '../../context/index.js'
 import usersAPI from '../../api/users.js'
 import noProfile from '../../assets/images/no-profile.png'
 
 const FriendRequests = () => {
 
-    const { auth } = useContext(authContext)
-    const { socketState: {socket} } = useContext(socketContext)
+    const { auth } = useAuth()
+    const { socketState: {socket} } = useSocket()
     const { 
         userState: { friendRequests, awaitFriends },
         setFriendRequests,
         addNewFriendRequest,
         addNewFriend,
-        removeFriendRequest} = useContext(userContext)
+        removeFriendRequest} = useUser()
 
     const [isLoading, setIsLoading] = useState(true)
 

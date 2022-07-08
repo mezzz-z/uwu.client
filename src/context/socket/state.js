@@ -1,10 +1,10 @@
-import SocketContext from './socket-context.js'
+import SocketContext from './context.js'
 import {
     CONNECTION_CREATED,SUBMIT_USER_ID,
     SUBMIT_CURRENT_ROOM,
-    SET_INVITATION, CLEAR_INVITATION } from './socket-actions'
+    SET_INVITATION, CLEAR_INVITATION } from './actions'
     
-import socketReducer from './socket-reducer.js'
+import socketReducer from './reducer.js'
 import { useReducer } from 'react'
 import { io } from 'socket.io-client'
 

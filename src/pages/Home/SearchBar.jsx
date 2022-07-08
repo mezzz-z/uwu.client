@@ -1,6 +1,6 @@
-import { useState, useContext } from "react"
+import { useState } from "react"
 import usersAPI from '../../api/users.js'
-import { authContext, socketContext } from '../../context/index.js'
+import { useAuth, useSocket } from '../../context/index.js'
 import useFormModal from '../../hooks/useFormModal'
 import FormModal from '../../components/FormModal'
 import { useEffect } from "react"
@@ -9,9 +9,9 @@ const SearchBar = () => {
 
     const [username, setUsername] = useState('')
 
-    const { auth: { token } } = useContext(authContext)
+    const { auth: { token } } = useAuth()
     const { modalState: modal, removeModal, setModal } = useFormModal()
-    const { socketState: { socket } }  = useContext(socketContext)
+    const { socketState: { socket } }  = useSocket()
 
 
     const sendFriendRequest = async () => {

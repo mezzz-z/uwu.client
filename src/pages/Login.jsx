@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react'
-import { authContext } from '../context/index'
+import { useState } from 'react'
+import { useAuth } from '../context/index'
 import HandleInputs from '../helpers/HandleInputs'
 import authAPI from '../api/auth.js'
 import useFormModal from '../hooks/useFormModal'
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 const Login = () => {
 
-    const { loggedIn, setIsModalOpen } = useContext(authContext)
+    const { loggedIn, setIsModalOpen } = useAuth()
     const [ formFields, setFormField ] = useState({username: '', password: ''})
     const { handle } = new HandleInputs(setFormField, formFields)
     const { modalState, setModal, removeModal } = useFormModal()

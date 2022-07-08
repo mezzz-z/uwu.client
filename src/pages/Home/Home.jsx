@@ -2,8 +2,8 @@ import Friends from './Friends.jsx'
 import FriendRequests from './FriendRequests'
 import Rooms from './Rooms.jsx'
 import ChatRoom from './ChatRoom.jsx'
-import { useState, useRef, useContext } from 'react'
-import { currentRoomContext, socketContext, userContext, authContext } from '../../context/index.js'
+import { useState, useRef } from 'react'
+import { useCurrentRoom, useSocket, useUser, useAuth } from '../../context/index.js'
 import CreateRoom from './CreateRoom.jsx'
 import ModalWrapper from '../../components/ModalWrapper/ModalWrapper.jsx'
 import usersAPI from '../../api/users.js'
@@ -22,10 +22,10 @@ const Home = () => {
 
 
     // useContext
-    const { currentRoom } = useContext(currentRoomContext)
-    const { setUser, userState, setFriendRequests } = useContext(userContext)
-    const { socketState, clearInvitation, createInvitation, submitCurrentRoom } = useContext(socketContext)
-    const { auth } = useContext(authContext)
+    const { currentRoom } = useCurrentRoom()
+    const { setUser, userState } = useUser()
+    const { socketState, clearInvitation, createInvitation, submitCurrentRoom } = useSocket()
+    const { auth } = useAuth()
 
     const toggleComponents = (e) => {
         currentActiveComponent.current.classList.remove('active')

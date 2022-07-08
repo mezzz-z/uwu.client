@@ -1,17 +1,18 @@
-import authContext from './auth/auth-context.js'
-import AuthState from './auth/AuthState.js'
-import UserState from './user/UserState.js'
-import userContext from './user/user-context.js'
-import CurrentRoomState from './current-room/CurrentRoomState.js'
-import currentRoomContext from './current-room/current-room-context.js'
-import socketContext from './socket/socket-context.js'
-import SocketState from './socket/SocketState.js'
+import useAuth from './auth/hook.js'
+
+import AuthState from './auth/state.js'
+import useUser from './user/hook.js'
+import UserState from './user/state.js'
+import CurrentRoomState from './current-room/state.js'
+import useCurrentRoom from './current-room/hook.js'
+import useSocket from './socket/hook.js'
+import SocketState from './socket/state.js'
 
 export {
-    authContext,
-    userContext,
-    currentRoomContext,
-    socketContext,
+    useAuth,
+    useUser,
+    useCurrentRoom,
+    useSocket,
     AuthState,
     UserState,
     CurrentRoomState,

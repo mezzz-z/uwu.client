@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, useContext } from 'react'
-import { socketContext } from '../../context/index.js'
+import { useEffect, useRef, useState } from 'react'
+import { useSocket } from '../../context/index.js'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import ModalWrapper from '../../components/ModalWrapper/ModalWrapper.jsx'
@@ -31,7 +31,7 @@ const VideoCallRoom = () => {
     const {roomId}  = useParams()
     // const navigate = useNavigate()
     
-    const {socketState: {socket}} = useContext(socketContext)
+    const {socketState: {socket}} = useSocket()
     
     // references
     const pc = useRef(new RTCPeerConnection(servers))
