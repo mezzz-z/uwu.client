@@ -10,6 +10,7 @@ import usersAPI from '../../api/users.js'
 import { useEffect } from 'react'
 import InvitationModal from './Invitation.jsx'
 import SearchBar from './SearchBar.jsx'
+import AddUserToRoom from './AddUserToRoom.jsx'
 
 
 const Home = () => {
@@ -17,9 +18,9 @@ const Home = () => {
     const [currentSidebarComponent, setCurrentSidebarComponent] = useState('friends')
     const currentActiveComponent = useRef()
 
-    // modalsStates
+    // modals States
     const [showCreateRoomModal, setShowCreateRoomModal] = useState(false)
-
+    const [showAddUserToRoomModal, setShowAddUserToRoomModal] = useState({showModal: false, userId: ''}) 
 
     // useContext
     const { currentRoom } = useCurrentRoom()
@@ -104,7 +105,7 @@ const Home = () => {
                     </nav>
                 
                     {currentSidebarComponent === 'rooms' && <Rooms setShowCreateRoomModal={setShowCreateRoomModal} />}
-                    {currentSidebarComponent === 'friends' && <Friends />}
+                    {currentSidebarComponent === 'friends' && <Friends setShowAddUserToRoomModal={setShowAddUserToRoomModal} />}
                     {currentSidebarComponent === 'friend_requests' && <FriendRequests/>}
 
                 </article>
@@ -127,16 +128,28 @@ const Home = () => {
             }
 
 
-            {/* ======  MODALS ====== */}
-
             {showCreateRoomModal &&
                 <ModalWrapper
                  hideModalCallback={() => setShowCreateRoomModal(false)}
-                 hideModalOnCoverClick={true}>
+                 hideModalOnCoverClick={true}
+                 transparentCover={true}
+                 >
 
                     <CreateRoom/>
                 </ModalWrapper>
             }
+
+            {showAddUserToRoomModal.showModal &&
+                <ModalWrapper
+                 hideModalCallback={() => setShowAddUserToRoomModal({showModal: false, userId: ''})}
+                 hideModalOnCoverClick={true}
+                 transparentCover={true}
+                 >
+
+                    <AddUserToRoom userId={showAddUserToRoomModal.userId} />
+                </ModalWrapper>
+            }
+
 
             {socketState.invitation &&
                 <ModalWrapper
@@ -150,6 +163,7 @@ const Home = () => {
                     
                 </ModalWrapper>
             }
+
         </main>
     )
 }

@@ -1,0 +1,43 @@
+.add-user-to-room {
+    background-color: $cl-secondary;
+    padding: 30px;
+
+    h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .rooms {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .room {
+            padding: 10px 30px;
+            width: 100%;
+            background-color: $cl-custom-orange;
+            text-align: left;
+            position: relative;
+            transition: .4s;
+
+            &:not(:disabled) {
+                &:hover {
+                    background-color: lighten($cl-custom-orange, 15%);
+                }
+            }
+
+            &:disabled {
+                background-color: darken($cl-custom-orange, 30%);
+                &::after {
+                    position: absolute;
+                    right: 20px;
+                    top: 50%;
+                    content: 'Already joined';
+                    transform: translateY(-50%);
+                    font-size: .5em;
+                    color: rgba(255, 255, 255, 0.547);
+                }
+            }
+        }        
+    }
+}

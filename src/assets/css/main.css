@@ -1252,4 +1252,54 @@ input {
   width: 90px;
   border-radius: 50%;
 }
+
+.add-user-to-room {
+  background-color: #232323;
+  padding: 30px;
+}
+
+.add-user-to-room h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-user-to-room .rooms {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.add-user-to-room .rooms .room {
+  padding: 10px 30px;
+  width: 100%;
+  background-color: #E45E12;
+  text-align: left;
+  position: relative;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.add-user-to-room .rooms .room:not(:disabled):hover {
+  background-color: #f18b51;
+}
+
+.add-user-to-room .rooms .room:disabled {
+  background-color: #562407;
+}
+
+.add-user-to-room .rooms .room:disabled::after {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  content: 'Already joined';
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: .5em;
+  color: rgba(255, 255, 255, 0.547);
+}
 /*# sourceMappingURL=main.css.map */

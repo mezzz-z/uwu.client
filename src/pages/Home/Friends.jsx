@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useUser, useSocket, useAuth } from '../../context/index.js'
 import { v4 as uuidv4 } from 'uuid'
 
-const Friends = () => {
+const Friends = ({setShowAddUserToRoomModal}) => {
 
     const { auth } = useAuth()
     const { socketState: {socket} } = useSocket()
@@ -33,6 +33,7 @@ const Friends = () => {
             console.log('user is busy')
         })
     }
+
 
     useEffect(() => {
 
@@ -96,7 +97,11 @@ const Friends = () => {
                                             </div>
                                         </section>
                                         <section className="actions-container">
-                                            <button href="" className="add-to-room action not-button">
+                                            <button
+                                             href=""
+                                             className="add-to-room action not-button"
+                                             onClick={() => setShowAddUserToRoomModal({showModal: true, userId: friend.user_id})} >
+
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M18 0H2C0.897 0 0 0.897 0 2V20L4 16H18C19.103 16 20 15.103 20 14V2C20 0.897 19.103 0 18 0ZM15 9H11V13H9V9H5V7H9V3H11V7H15V9Z" fill="#0D66EC"/>
                                                 </svg>
