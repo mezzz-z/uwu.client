@@ -29,8 +29,6 @@ let constraints = {
 const VideoCallRoom = () => {
     
     const {roomId}  = useParams()
-    // const navigate = useNavigate()
-    
     const {socketState: {socket}} = useSocket()
     
     // references
