@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 const Friends = () => {
 
-    const { auth } = useAuth
+    const { auth } = useAuth()
     const { socketState: {socket} } = useSocket()
     const { 
         setFriends,

@@ -1,23 +1,38 @@
 import { useState } from 'react'
 import CurrentRoomContext from './context.js'
 
+const initial = {
+    messages: [],
+    users_ids: [],
+    room_name: '',
+    room_id: '',
+    awaitFetchMessages: true,
+    awaitFetchRoom: true,
+    areMessagesFinished: false,
+}
+
 const CurrentRoomState = (props) => {
 
-    const [ currentRoomState, setCurrentRoomState ] = useState({
-        messages: null,
-        users_ids: [],
-        room_name: '',
-        room_id: '',
-    })
+    const [ currentRoomState, setCurrentRoomState ] = useState(initial)
 
-    const setCurrentRoom = (messages, roomName, roomId, roomUsers) => {
+    const setCurrentRoom = (roomName, roomId, roomUsers) => {
         setCurrentRoomState({
             ...currentRoomState,
-            messages: messages,
             room_name: roomName,
             room_id: roomId,
             users_ids: roomUsers,
-            submitted: false
+            awaitFetchRoom: false,
+        })
+    }
+
+    const setMessages = (messages, isFinished, initial=true) => {
+        setCurrentRoomState(state => {
+            return {
+                ...state,
+                messages: initial ? [ ...messages ] : [ ...messages, ...state.messages ],
+                awaitFetchMessages: false,
+                areMessagesFinished: isFinished
+            }
         })
     }
 
@@ -30,7 +45,7 @@ const CurrentRoomState = (props) => {
                     created_at: message.created_at,
                     message_text: message.message_text,
                     sender: {
-                        sender_id: message.sender_id,
+                        user_id: message.sender_id,
                         profile_picture: message.profile_picture,
                         username: message.username
                     }
@@ -48,7 +63,8 @@ const CurrentRoomState = (props) => {
             currentRoom: currentRoomState,
             setCurrentRoom: setCurrentRoom,
             submitCurrentRoom: submitCurrentRoom,
-            addNewMessage: addNewMessage
+            addNewMessage: addNewMessage,
+            setMessages: setMessages
         }}>
 
             {props.children}

@@ -1,22 +1,28 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useRef } from 'react'
 import { useSocket, useAuth, useCurrentRoom } from '../../context/index.js'
+import roomsAPI from '../../api/rooms.js'
 import noProfile from '../../assets/images/no-profile.png'
-
-
-// TODO: limit messages to fetch
-// TODO: load more messages on firstMessage.current.scrollIntoView
-
 
 const ChatRoom = () => {
 
-    // useContext
-    const { currentRoom, addNewMessage } = useCurrentRoom()
+    const { currentRoom, addNewMessage, setMessages } = useCurrentRoom()
     const { auth } = useAuth()
     const { socketState: {socket} } = useSocket()
 
-
+    const firstMessage = useRef(null)
     const scrollSpan = useRef(null)
+    const observer = useRef(null)
+    const newMessage = useRef(false)
 
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if(!entry.target.id === 'firstMessage' || !entry.isIntersecting) return
+            roomsAPI.getRoomMessages(currentRoom.room_id, auth.token, currentRoom.messages.length)
+            .then(({data}) => {setMessages(data.messages, data.isFinished, false)})
+            .catch(error => console.log(error))
+        });
+    }
 
     const [messageText, setMessageText] = useState('')
 
@@ -31,14 +37,48 @@ const ChatRoom = () => {
     }
     
     useEffect(() => {
+        roomsAPI.getRoomMessages(currentRoom.room_id, auth.token)
+         .then(({data}) => {
+            newMessage.current = true
+            setMessages(data.messages, data.isFinished)
+        })
+         .catch(error => console.log(error))
+
         socket.on("chat-room/new-message", (message) => {
+            newMessage.current = true
             addNewMessage(message)
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+
+        return () => {
+            socket.removeListener('chat-room/new-message')
+        }
+    }, [currentRoom.room_id])
+
+
 
     useEffect(() => {
-        scrollSpan.current.scrollIntoView({ behavior: "smooth" });
+        if(currentRoom.awaitFetchMessages) return
+
+        if(newMessage.current) {
+            scrollSpan.current.scrollIntoView({ behavior: "smooth" })
+            newMessage.current = false
+        }
+        
+        console.log(currentRoom.areMessagesFinished)
+        if(currentRoom.areMessagesFinished) {
+            if(observer.current) observer.current.disconnect()
+            return
+        }
+        
+        setTimeout(() => {
+            observer.current = new IntersectionObserver(observerCallback, {rootMargin: '-100px 0px 0px -100px'})
+            observer.current.observe(firstMessage.current)
+        }, 1000)
+
+        return () => {
+            if(observer.current) observer.current.disconnect()
+        }
+
     }, [currentRoom.messages])
 
     return (
@@ -49,34 +89,37 @@ const ChatRoom = () => {
                     <button className="room-info not-button">room info</button>
                 </header>
                 <div className="main-container">
-                    { currentRoom.messages.length > 0 
-                        ?  currentRoom.messages.map((message) => {
-                                return(
-                                    <div
-                                     key={message.message_id}
-                                     itsme={message.sender.sender_id === auth.userId ? 'true' : 'false'}
-                                     className="message-container">
-
-                                        <div className="user">
-                                            <img src={noProfile} alt="" className="profile-picture" />
-                                            <span className="username">{message.sender.username}</span>
-                                        </div>
-                                        <div className="message">
-                                            <span className="created-at">25/9/10</span>
-                                            <div className="dropdown-container">
-                                                <span className="dropdown-icon">
-                                                    <span></span>
-                                                    <span></span>
-                                                    <span></span>
-                                                </span>
+                    {currentRoom.awaitFetchMessages 
+                        ? <h3 className="no-messages">Loading...</h3>
+                        : currentRoom.messages.length > 0 
+                            ?  currentRoom.messages.map((message, i) => {
+                                    return(
+                                        <div
+                                         ref={i === 0 ? firstMessage : undefined}
+                                         key={message.message_id}
+                                         itsme={message.sender.user_id === auth.userId ? 'true' : 'false'}
+                                         className="message-container"
+                                         id={i === 0 ? 'firstMessage' : undefined} >
+    
+                                            <div className="user">
+                                                <img src={noProfile} alt="" className="profile-picture" />
+                                                <span className="username">{message.sender.username}</span>
                                             </div>
-                                            <p className="message-text">{message.message_text}</p>
+                                            <div className="message">
+                                                <span className="created-at">25/9/10</span>
+                                                <div className="dropdown-container">
+                                                    <span className="dropdown-icon">
+                                                        <span></span>
+                                                        <span></span>
+                                                        <span></span>
+                                                    </span>
+                                                </div>
+                                                <p className="message-text">{message.message_text}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                )
-                            })
-
-                        :   <h3 className="no-messages">There is no messages</h3>
+                                    )
+                                })
+                            :   <h3 className="no-messages">There is no messages</h3>
                     }
 
                     <span ref={scrollSpan} style={{display: 'inline'}}></span>

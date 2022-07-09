@@ -7,7 +7,7 @@ const Rooms = ({setShowCreateRoomModal}) => {
     const [roomsState, setRoomsState] = useState({rooms: [], isLoading: true})
 
     // useContext
-    const { auth } = useAuth
+    const { auth } = useAuth()
     const { setCurrentRoom, currentRoom } = useCurrentRoom()
     const { socketState: { socket } } = useSocket()
 
@@ -27,7 +27,8 @@ const Rooms = ({setShowCreateRoomModal}) => {
                 lastRoomId: currentRoom?.room_id || null
             })
 
-            setCurrentRoom(room.messages, room.room_name, room.room_id, room.users_ids)
+            
+            setCurrentRoom(room.room_name, room.room_id, room.users_ids)
 
             setRoomsState(currentState => {
                 return {

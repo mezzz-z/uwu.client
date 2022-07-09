@@ -24,6 +24,7 @@ class Users {
             headers: {"authorization": "Bearer " + accessToken}
         })
     }
+
 }
 
 export default new Users()
