@@ -40,6 +40,8 @@ const ModalWrapper = ({
         }
     }
 
+
+
     const animationReducer = (state, action) => {
         switch (action.type) {
             case 'modal-wrapper/showModal':
@@ -66,6 +68,7 @@ const ModalWrapper = ({
     }
     const [state, dispatch] = useReducer(animationReducer, initialState)
     const [hideModalCountDown, setHideModalCountDown] = useState((autoHideModalDelay || 3000) - 1000)
+
     const hideModalCountDownRef = useRef(null)
     const autoHideModalTimeoutRef = useRef(null)
 
@@ -90,6 +93,7 @@ const ModalWrapper = ({
             }, animationDelay)
         }
     }
+
 
     useEffect(() => {
         dispatch({type: 'modal-wrapper/showModal'})
@@ -121,6 +125,7 @@ const ModalWrapper = ({
 
                 {children}
             </div>
+
         </ModalWrapperContext.Provider>
     )
 }

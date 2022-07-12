@@ -2,6 +2,7 @@
 const FormModal = ({modalClassName, modalContent, removeModal}) => {
 
     const className = `modal-container ${modalClassName}`;
+    
 
     removeModal(3000)
 

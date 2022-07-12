@@ -36,6 +36,7 @@ const ChatRoom = () => {
         setMessageText('')
     }
     
+
     useEffect(() => {
         roomsAPI.getRoomMessages(currentRoom.room_id, auth.token)
          .then(({data}) => {

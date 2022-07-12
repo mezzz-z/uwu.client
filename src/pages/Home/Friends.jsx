@@ -60,7 +60,7 @@ const Friends = ({setShowAddUserToRoomModal}) => {
         }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [friends])
+    }, [])
 
     return (
         <section className="friends-container">
