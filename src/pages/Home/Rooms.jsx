@@ -27,7 +27,7 @@ const Rooms = ({setShowCreateRoomModal}) => {
                 lastRoomId: currentRoom?.room_id || null
             })
 
-            
+
             setCurrentRoom(room.room_name, room.room_id, room.users_ids)
 
             setRoomsState(currentState => {
@@ -116,7 +116,11 @@ const Rooms = ({setShowCreateRoomModal}) => {
                     ?   <h3>Loading...</h3>
                     :   roomsState.rooms.map(room => {
                         return (
-                            <div onClick={() => joinRoom(room.room_id)} key={room.room_id} className="room card">
+                            <div
+                             onClick={() => joinRoom(room.room_id)}
+                             key={room.room_id}
+                             className={`room card ${currentRoom.room_id === room.room_id && 'current-room'}`}>
+                                
                                 <h4 className="title">{room.room_name}</h4>
                                 <div className="notifications-container">
                                     { room.notificationsIds.length > 0 && 

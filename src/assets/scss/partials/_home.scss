@@ -217,11 +217,43 @@
                 }
 
                 .room {
+
                     padding-inline: 25px;
+                    position: relative;
                     background-color: $cl-bg;
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    overflow: hidden;
+                    z-index: 1;
+
+                    &:not(.current-room) {
+                        &::after {
+                            transition: .5s;
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            background-color: lighten($cl-secondary, 20%);
+                            z-index: -1;
+                            width: 100%;
+                            height: 0%;
+                            content: '';
+                            border-radius: 50% 50% 0% 0%;
+                        }
+
+                        cursor: pointer;
+                    }
+                        
+
+                    &.current-room {
+                        background-color: $cl-custom-orange;
+                    }
+
+                    &:hover {
+                        &::after {
+                            height: 180%;
+                        }
+                    }
 
                     .title {
                         font-weight: 700;

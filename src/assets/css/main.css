@@ -479,6 +479,7 @@ input {
 
 #home .sidebar .sidebar-components-container .rooms-container .room {
   padding-inline: 25px;
+  position: relative;
   background-color: #1d1d1d;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -489,6 +490,34 @@ input {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#home .sidebar .sidebar-components-container .rooms-container .room:not(.current-room) {
+  cursor: pointer;
+}
+
+#home .sidebar .sidebar-components-container .rooms-container .room:not(.current-room)::after {
+  -webkit-transition: .5s;
+  transition: .5s;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #565656;
+  z-index: -1;
+  width: 100%;
+  height: 0%;
+  content: '';
+  border-radius: 50% 50% 0% 0%;
+}
+
+#home .sidebar .sidebar-components-container .rooms-container .room.current-room {
+  background-color: #E45E12;
+}
+
+#home .sidebar .sidebar-components-container .rooms-container .room:hover::after {
+  height: 180%;
 }
 
 #home .sidebar .sidebar-components-container .rooms-container .room .title {
