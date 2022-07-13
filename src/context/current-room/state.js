@@ -54,6 +54,17 @@ const CurrentRoomState = (props) => {
         })
     }
 
+    const removeMessage = (messageId) => {
+        setCurrentRoomState(state => {
+            return {
+                ...state,
+                messages: state.messages.filter(message => {
+                    return message.message_id !== messageId
+                })
+            }
+        })
+    }
+
     const submitCurrentRoom = () => {
         setCurrentRoomState({...currentRoomState, submitted: true})
     }
@@ -64,7 +75,8 @@ const CurrentRoomState = (props) => {
             setCurrentRoom: setCurrentRoom,
             submitCurrentRoom: submitCurrentRoom,
             addNewMessage: addNewMessage,
-            setMessages: setMessages
+            setMessages: setMessages,
+            removeMessage: removeMessage
         }}>
 
             {props.children}

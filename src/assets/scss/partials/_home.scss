@@ -481,17 +481,26 @@
                             
                             right: 15px;
                             top: 15px;
+                            box-sizing: content-box;
+
+
+                            &:hover {
+                                .dropdown-icon {
+                                    span {
+                                        background-color: black;
+                                    }
+                                }
+
+                                .dropdown-menu {
+                                    display: block;
+                                }
+                            }
 
                             .dropdown-icon {
                                 display: flex;
                                 flex-direction: column;
                                 align-items: center;
                                 gap: 2px;
-                                &:hover {
-                                    span {
-                                        background-color: black;
-                                    }
-                                }
 
                                 span {
                                     background-color: #847F7F;
@@ -501,6 +510,41 @@
                                     
                                 }
                             }
+
+                            .dropdown-menu {
+                                display: none;
+                                min-width: 100px;
+                                position: absolute;
+                                right: 0;
+                                top: -10px;
+                                box-sizing: content-box;
+                                padding-inline: 15px;
+
+                                ul {
+                                    display: flex;
+                                    flex-direction: column;
+                                    color: white;
+                                    list-style: none;
+                                    gap: 3px;
+                                    
+                                    li {
+                                        background-color: rgb(37, 37, 37);
+                                        border-radius: 5px;
+                                        &:hover {
+                                            background-color: $cl-custom-orange;
+                                        }
+                                        
+                                        button {
+                                            width: 150px;
+                                            padding: 7px 30px;
+                                            font-size: .6rem;
+                                            font-weight: 500;
+                                            letter-spacing: 1px;
+                                        }
+                                    }
+                                }
+                            }
+
                         }
 
                         &.created-at {
@@ -544,17 +588,22 @@
                         &.dropdown-container {
                             left: 15px;
                             right: unset;
-                            .dropdown-icon {
-
-                                &:hover {
+                            &:hover {
+                                .dropdown-container {
                                     span {
                                         background-color: white;
                                     }
                                 }
-
+                            }
+                            .dropdown-icon {
                                 span {
                                     background-color: #c3c3c3;
                                 }
+                             }
+
+                             .dropdown-menu {
+                                right: unset;
+                                left: 0;
                              }
                         }
                     }

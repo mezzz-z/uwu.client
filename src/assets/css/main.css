@@ -816,6 +816,18 @@ input {
 #home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container {
   right: 15px;
   top: 15px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container:hover .dropdown-icon span,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container:hover .dropdown-icon span {
+  background-color: black;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container:hover .dropdown-menu,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container:hover .dropdown-menu {
+  display: block;
 }
 
 #home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-icon,
@@ -833,17 +845,58 @@ input {
   gap: 2px;
 }
 
-#home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-icon:hover span,
-#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-icon:hover span {
-  background-color: black;
-}
-
 #home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-icon span,
 #home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-icon span {
   background-color: #847F7F;
   width: 3px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-menu,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-menu {
+  display: none;
+  min-width: 100px;
+  position: absolute;
+  right: 0;
+  top: -10px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  padding-inline: 15px;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-menu ul,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-menu ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: white;
+  list-style: none;
+  gap: 3px;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-menu ul li,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-menu ul li {
+  background-color: #252525;
+  border-radius: 5px;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-menu ul li:hover,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-menu ul li:hover {
+  background-color: #E45E12;
+}
+
+#home .chat-screen .main-container .message-container .message .created-at.dropdown-container .dropdown-menu ul li button,
+#home .chat-screen .main-container .message-container .message .dropdown-container.dropdown-container .dropdown-menu ul li button {
+  width: 150px;
+  padding: 7px 30px;
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 #home .chat-screen .main-container .message-container .message .created-at.created-at,
@@ -892,14 +945,20 @@ input {
   right: unset;
 }
 
-#home .chat-screen .main-container .message-container[itsme=true] .created-at.dropdown-container .dropdown-icon:hover span,
-#home .chat-screen .main-container .message-container[itsme=true] .dropdown-container.dropdown-container .dropdown-icon:hover span {
+#home .chat-screen .main-container .message-container[itsme=true] .created-at.dropdown-container:hover .dropdown-container span,
+#home .chat-screen .main-container .message-container[itsme=true] .dropdown-container.dropdown-container:hover .dropdown-container span {
   background-color: white;
 }
 
 #home .chat-screen .main-container .message-container[itsme=true] .created-at.dropdown-container .dropdown-icon span,
 #home .chat-screen .main-container .message-container[itsme=true] .dropdown-container.dropdown-container .dropdown-icon span {
   background-color: #c3c3c3;
+}
+
+#home .chat-screen .main-container .message-container[itsme=true] .created-at.dropdown-container .dropdown-menu,
+#home .chat-screen .main-container .message-container[itsme=true] .dropdown-container.dropdown-container .dropdown-menu {
+  right: unset;
+  left: 0;
 }
 
 .create-room-container {

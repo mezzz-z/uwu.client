@@ -2,11 +2,11 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSocket, useAuth, useCurrentRoom } from '../../context/index.js'
 import roomsAPI from '../../api/rooms.js'
-import noProfile from '../../assets/images/no-profile.png'
+import Message from './Message.jsx'
 
 const ChatRoom = () => {
 
-    const { currentRoom, addNewMessage, setMessages } = useCurrentRoom()
+    const { currentRoom, addNewMessage, setMessages, removeMessage } = useCurrentRoom()
     const { auth } = useAuth()
     const { socketState: {socket} } = useSocket()
 
@@ -35,7 +35,14 @@ const ChatRoom = () => {
         }))
         setMessageText('')
     }
+
+    const deleteMessage = () => {
+        console.log('woo')
+    }
     
+    const editMessage = () => {
+        console.log('woo')
+    }
 
     useEffect(() => {
         roomsAPI.getRoomMessages(currentRoom.room_id, auth.token)
@@ -48,6 +55,10 @@ const ChatRoom = () => {
         socket.on("chat-room/new-message", (message) => {
             newMessage.current = true
             addNewMessage(message)
+        })
+        socket.on("chat-room/message-deleted", (messageId) => {
+            console.log(messageId)
+            removeMessage(messageId)
         })
 
         return () => {
@@ -65,7 +76,6 @@ const ChatRoom = () => {
             newMessage.current = false
         }
         
-        console.log(currentRoom.areMessagesFinished)
         if(currentRoom.areMessagesFinished) {
             if(observer.current) observer.current.disconnect()
             return
@@ -94,30 +104,16 @@ const ChatRoom = () => {
                         ? <h3 className="no-messages">Loading...</h3>
                         : currentRoom.messages.length > 0 
                             ?  currentRoom.messages.map((message, i) => {
-                                    return(
-                                        <div
-                                         ref={i === 0 ? firstMessage : undefined}
-                                         key={message.message_id}
-                                         itsme={message.sender.user_id === auth.userId ? 'true' : 'false'}
-                                         className="message-container"
-                                         id={i === 0 ? 'firstMessage' : undefined} >
-    
-                                            <div className="user">
-                                                <img src={noProfile} alt="" className="profile-picture" />
-                                                <span className="username">{message.sender.username}</span>
-                                            </div>
-                                            <div className="message">
-                                                <span className="created-at">25/9/10</span>
-                                                <div className="dropdown-container">
-                                                    <span className="dropdown-icon">
-                                                        <span></span>
-                                                        <span></span>
-                                                        <span></span>
-                                                    </span>
-                                                </div>
-                                                <p className="message-text">{message.message_text}</p>
-                                            </div>
-                                        </div>
+                                return ( 
+                                    <div
+                                     ref={i === 0 ? firstMessage : undefined}
+                                     key={message.message_id}
+                                     itsme={message.sender.user_id === auth.userId ? 'true' : 'false'}
+                                     className="message-container"
+                                     id={message.i === 0 ? 'firstMessage' : undefined} >
+
+                                        <Message message={message}/>
+                                    </div>
                                     )
                                 })
                             :   <h3 className="no-messages">There is no messages</h3>
