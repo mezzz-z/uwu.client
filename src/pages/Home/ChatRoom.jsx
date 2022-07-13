@@ -6,7 +6,7 @@ import Message from './Message.jsx'
 
 const ChatRoom = () => {
 
-    const { currentRoom, addNewMessage, setMessages, removeMessage } = useCurrentRoom()
+    const { currentRoom, addNewMessage, setMessages, removeMessage, editMessage } = useCurrentRoom()
     const { auth } = useAuth()
     const { socketState: {socket} } = useSocket()
 
@@ -15,7 +15,7 @@ const ChatRoom = () => {
     const observer = useRef(null)
     const newMessage = useRef(false)
 
-    const observerCallback = (entries, observer) => {
+    const observerCallback = (entries) => {
         entries.forEach(entry => {
             if(!entry.target.id === 'firstMessage' || !entry.isIntersecting) return
             roomsAPI.getRoomMessages(currentRoom.room_id, auth.token, currentRoom.messages.length)
@@ -28,20 +28,13 @@ const ChatRoom = () => {
 
     const sendMessage = async (e) => {
         e.preventDefault()
+        setMessageText('')
+
         socket.emit("chat-room/new-message", ({
             roomId: currentRoom.room_id,
             messageText,
             senderId: auth.userId
         }))
-        setMessageText('')
-    }
-
-    const deleteMessage = () => {
-        console.log('woo')
-    }
-    
-    const editMessage = () => {
-        console.log('woo')
     }
 
     useEffect(() => {
@@ -57,12 +50,16 @@ const ChatRoom = () => {
             addNewMessage(message)
         })
         socket.on("chat-room/message-deleted", (messageId) => {
-            console.log(messageId)
             removeMessage(messageId)
+        })
+        socket.on("chat-room/message-edited", (editedMessage) => {
+            editMessage(editedMessage.message_id, editedMessage.message_text)
         })
 
         return () => {
             socket.removeListener('chat-room/new-message')
+            socket.removeListener('chat-room/message-edited')
+            socket.removeListener('chat-room/message-deleted')
         }
     }, [currentRoom.room_id])
 
@@ -123,7 +120,13 @@ const ChatRoom = () => {
                 </div>
                 <article className="footer">
                     <form onSubmit={sendMessage} action="">
-                        <input required value={messageText} onChange={(e) => setMessageText(e.target.value)} placeholder="write something" type="text" />
+                        <textarea
+                         required
+                         value={messageText}
+                         onChange={(e) => setMessageText(e.target.value)}
+                         placeholder="write something"
+                         type="text" />
+                         
                         <button disabled={messageText ? false : true} type="submit">send</button>
                     </form>
                 </article>

@@ -54,6 +54,21 @@ const CurrentRoomState = (props) => {
         })
     }
 
+    const editMessage = (messageId, messageText) => {
+        console.log(messageId, messageText)
+        setCurrentRoomState(state => {
+            return {
+                ...state,
+                messages: state.messages.map(mappedMessage => {
+                    if(mappedMessage.message_id === messageId) {
+                        mappedMessage.message_text = messageText
+                    }
+                    return mappedMessage
+                })
+            }
+        })
+    }
+
     const removeMessage = (messageId) => {
         setCurrentRoomState(state => {
             return {
@@ -76,7 +91,8 @@ const CurrentRoomState = (props) => {
             submitCurrentRoom: submitCurrentRoom,
             addNewMessage: addNewMessage,
             setMessages: setMessages,
-            removeMessage: removeMessage
+            removeMessage: removeMessage,
+            editMessage: editMessage
         }}>
 
             {props.children}

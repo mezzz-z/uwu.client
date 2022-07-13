@@ -389,12 +389,15 @@
                         cursor: default;
                     }
                 }
-                input {
+                textarea {
                     height: 100%;
                     width: 100%;
                     background-color: $cl-chat-bg;
                     border: none;
+                    outline: none;
+                    padding-top: 5px;
                     padding-inline: 30px;
+                    resize: none;
 
                     &::placeholder {
                         color: white;
@@ -423,6 +426,7 @@
             .message-container {
                 gap: 30px;
                 display: flex;
+                position: relative;
                 $user-profile-padding: 0px;
                 $user-profile-height: 60px;
 
@@ -444,12 +448,58 @@
                         font-size: .7em;
                     }
                 }
+                .edit-message-container {
+                    position: absolute;
+                    z-index: 99;
+                    left: 0;
+                    top: 0;
+                    width: 105%;
+                    height: 105%;
+                    background-color: $cl-secondary;
+                    padding: 10px 10px 5px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    textarea {
+                        direction: ltr;
+                        padding: 5px 10px;
+                        outline: none;
+                        border: none;
+                        background-color: lighten($cl-secondary, 5%);
+                        color: white;
+                        resize: none;
+                        margin-bottom: 8px;
+                        height: 100%;
+                        font-size: .8em;
+                    }
+                    .actions {
+                        display: flex;
+                        justify-content: space-between;
+                        padding-inline: 5px;
+                        margin-bottom: 3px;
+                        
+                        .cancel  {
+                            font-size: .6rem;
+                            font-weight: regular;
+                            text-align: left;
+                            color: rgb(168, 167, 167);
+                            &:hover {
+                                color: white;
+                            }
+                        }
+                        .submit {
+                            font-size: .6rem;
+                            color: #7baffc;
+                            &:disabled {
+                                color: #7baffc88;
+                            }
+                        }
+                    }
+                }
                 .message {
                     background-color: $cl-message-bg;
                     max-width: 600px;
                     min-width: 200px;
                     padding: 40px 50px;
-                    border-radius: 15px;
                     position: relative;
                     font-size: .9em;
                     
