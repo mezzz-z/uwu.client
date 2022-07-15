@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useSocket, useAuth, useCurrentRoom } from '../../context/index.js'
 import roomsAPI from '../../api/rooms.js'
 import Message from './Message.jsx'
+import RoomInfo from './RoomInfo.jsx'
 
 const ChatRoom = () => {
 
@@ -19,12 +20,13 @@ const ChatRoom = () => {
         entries.forEach(entry => {
             if(!entry.target.id === 'firstMessage' || !entry.isIntersecting) return
             roomsAPI.getRoomMessages(currentRoom.room_id, auth.token, currentRoom.messages.length)
-            .then(({data}) => {setMessages(data.messages, data.isFinished, false)})
+            .then(({ data }) => {setMessages(data.messages, data.isFinished, false)})
             .catch(error => console.log(error))
         });
     }
 
     const [messageText, setMessageText] = useState('')
+    const [showRoomInfo, setShowRoomInfo] = useState(false)
 
     const sendMessage = async (e) => {
         e.preventDefault()
@@ -38,6 +40,9 @@ const ChatRoom = () => {
     }
 
     useEffect(() => {
+
+        if(showRoomInfo) setShowRoomInfo(false)
+
         roomsAPI.getRoomMessages(currentRoom.room_id, auth.token)
          .then(({data}) => {
             newMessage.current = true
@@ -92,9 +97,16 @@ const ChatRoom = () => {
     return (
 
             <section className="chat-screen">
+
+                {showRoomInfo &&
+                    <RoomInfo
+                     removeComponent={() => setShowRoomInfo(false)}
+                     room={currentRoom}
+                     />}
+
                 <header className="header">
                     <h3 className="room-name">{currentRoom.room_name}</h3>
-                    <button className="room-info not-button">room info</button>
+                    <button onClick={() => setShowRoomInfo(true)} className="room-info not-button">room info</button>
                 </header>
                 <div className="main-container">
                     {currentRoom.awaitFetchMessages 

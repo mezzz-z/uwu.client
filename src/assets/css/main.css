@@ -564,16 +564,37 @@ input {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
-#home .sidebar .sidebar-components-container .friend-requests-container .friend-request img {
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 5px;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .user img {
   border-radius: 50%;
-  width: 60px;
-  margin-right: 20px;
+  width: 65px;
+}
+
+#home .sidebar .sidebar-components-container .friend-requests-container .friend-request .user .username {
+  font-size: .9em;
 }
 
 #home .sidebar .sidebar-components-container .friend-requests-container .friend-request .actions {
-  margin-left: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -663,15 +684,183 @@ input {
   display: grid;
   -ms-grid-rows: 50px auto 60px;
       grid-template-rows: 50px auto 60px;
+  overflow: hidden;
 }
 
-#home .chat-screen .header,
-#home .chat-screen .footer {
+#home .chat-screen #room-info {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+  left: 0;
+  overflow-y: scroll;
+}
+
+#home .chat-screen #room-info .close-button {
+  position: absolute;
+  left: 11px;
+  top: 11px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#home .chat-screen #room-info .close-button .close-button-icon {
+  position: relative;
+  width: 10px;
+  height: 10px;
+}
+
+#home .chat-screen #room-info .close-button .close-button-icon span {
+  display: block;
+  position: absolute;
+  background-color: red;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 2px;
+  height: 10px;
+  left: 50%;
+  top: 50%;
+}
+
+#home .chat-screen #room-info .close-button .close-button-icon span:nth-child(1) {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+#home .chat-screen #room-info .close-button .close-button-icon span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+
+#home .chat-screen #room-info * {
+  color: black;
+}
+
+#home .chat-screen #room-info .inner-container {
+  width: 100%;
+  height: 100%;
+  padding-block: 70px;
+  width: 40%;
+  margin-inline: auto;
+}
+
+#home .chat-screen #room-info .inner-container > .header {
+  text-align: center;
+  text-transform: capitalize;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.305);
+  padding-bottom: 20px;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+  padding-block: 30px;
+  padding-inline: 5px;
+  font-size: .9em;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .basic-information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+  margin-bottom: 30px;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .basic-information .item .key {
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .basic-information .item .value {
+  font-weight: regular;
+  font-size: .9em;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(150px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding-block: 40px;
+  gap: 10px;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users * {
+  color: white;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users .user {
+  position: relative;
+  padding: 30px;
+  padding-bottom: 15px;
+  background-color: #232323;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users .user img.profile-picture {
+  width: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users .user .username {
+  font-weight: 500;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users .user .actions {
+  margin-top: 25px;
+  font-size: .6rem;
+  font-weight: 300;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users .user .actions a {
+  text-decoration: none;
+}
+
+#home .chat-screen #room-info .inner-container > .content-wrapper .users .user .actions .see-profile {
+  color: #e9a5fd;
+}
+
+#home .chat-screen > .header,
+#home .chat-screen > .footer {
   height: 100%;
   background-color: white;
 }
 
-#home .chat-screen .header {
+#home .chat-screen > .header {
   position: relative;
   left: 0;
   top: 0;
@@ -690,7 +879,7 @@ input {
   z-index: 999;
 }
 
-#home .chat-screen .header * {
+#home .chat-screen > .header * {
   color: black;
 }
 

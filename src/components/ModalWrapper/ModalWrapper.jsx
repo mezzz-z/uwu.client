@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState, useRef } from 'react'
 import ModalWrapperContext from './context.js'
-const animationDelay = 500
+const animationDelay = 700
 const ModalWrapper = ({
     children,
     autoHideModal,
@@ -21,12 +21,12 @@ const ModalWrapper = ({
             zIndex: '-99999',
             top: '50%',
             position: 'absolute',
-            transform: 'translate(-50%, -50%) scale(.5)',
+            transform: 'translate(-50%, -50%) scale(0)',
             minWidth: '200px',
             maxWidth: '800px',
             maxHeight: '500px',
             overflowY: 'scroll',
-            overflowX: 'hidden'
+            overflowX: 'hidden',
         },
         bodyCoverState: {
             left: '0',

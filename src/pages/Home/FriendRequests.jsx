@@ -63,11 +63,13 @@ const FriendRequests = () => {
                     : friendRequests.map(user => {
                         return (
                             <div key={user.user_id} className="friend-request">
-                                <img src={user.profile_picture || noProfile} alt="" className="profile-picture" />
-                                <span className="username">{user.username}</span>
+                                <div className="user">
+                                    <img src={user.profile_picture || noProfile} alt="" className="profile-picture" />
+                                    <span className="username">{user.username}</span>
+                                </div>
                                 <div className="actions">
-                                <button onClick={() => sendRequestAnswer(true, user.user_id)} className="accept">accept</button>
-                                <button onClick={() => sendRequestAnswer(false, user.user_id)} className="reject">reject</button>
+                                    <button onClick={() => sendRequestAnswer(true, user.user_id)} className="accept">accept</button>
+                                    <button onClick={() => sendRequestAnswer(false, user.user_id)} className="reject">reject</button>
                                 </div>
                             </div>
                         )

@@ -15,12 +15,10 @@ const CurrentRoomState = (props) => {
 
     const [ currentRoomState, setCurrentRoomState ] = useState(initial)
 
-    const setCurrentRoom = (roomName, roomId, roomUsers) => {
+    const setCurrentRoom = (room) => {
         setCurrentRoomState({
             ...currentRoomState,
-            room_name: roomName,
-            room_id: roomId,
-            users_ids: roomUsers,
+            ...room,
             awaitFetchRoom: false,
         })
     }
