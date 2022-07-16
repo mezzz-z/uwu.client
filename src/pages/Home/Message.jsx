@@ -59,7 +59,7 @@ const Message = ({message}) => {
                     </div>
                 </div>}
 
-            <span className="created-at">25/9/10</span>
+            <span className="created-at">{message.created_at.split('T')[0]}</span>
 
             {
                 message.sender.user_id === auth.userId &&

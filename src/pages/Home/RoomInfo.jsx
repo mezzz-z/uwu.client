@@ -23,7 +23,6 @@ const RoomInfo = ({ removeComponent, room }) => {
 
     const { auth: { token } } = useAuth()
 
-    const [roomBasicInformation, setRoomBasicInformation] = useState({})
     const [roomMembers, setRoomMembers] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 

@@ -8,7 +8,7 @@ import CreateRoom from './CreateRoom.jsx'
 import ModalWrapper from '../../components/ModalWrapper/ModalWrapper.jsx'
 import usersAPI from '../../api/users.js'
 import { useEffect } from 'react'
-import InvitationModal from './Invitation.jsx'
+import VideoCallInvitation from './Invitation.jsx'
 import SearchBar from './SearchBar.jsx'
 import AddUserToRoom from './AddUserToRoom.jsx'
 
@@ -157,9 +157,11 @@ const Home = () => {
                  hideModalOnCoverClick={false}
                  autoHideModal={true}
                  autoHideModalDelay={25000}
-                 showHideModalCountDown={true}>
+                 showHideModalCountDown={true}
+                 transparentCover={true}
+                 >
 
-                    <InvitationModal />
+                    <VideoCallInvitation />
                     
                 </ModalWrapper>
             }
