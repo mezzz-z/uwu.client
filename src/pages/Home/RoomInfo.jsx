@@ -53,6 +53,7 @@ const RoomInfo = ({ removeComponent, room }) => {
             setInnerContainerStyle(state => ({...state, transform: 'translateX(0%)', opacity: 1}))
         } , mainContainerAnimationDuration / 2)
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

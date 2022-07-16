@@ -6,7 +6,7 @@
 
     display: flex;
     gap: 3vw;
-    
+
     $default-height: 85vh;
 
 
@@ -17,8 +17,8 @@
         position: relative;
         height: $default-height;
         min-width: 350px;
-        
-        
+
+
         .search-bar-container {
             height: 60px;
             position: relative;
@@ -65,14 +65,13 @@
             }
 
         }
-        
+
         .sidebar-components-container {
             background-color: white;
             height: 100%;
             position: relative;
             padding: (30px + $sidebar-navbar-height) 40px;
             overflow-y: scroll;
-            overflow-x: hidden;
 
             .nav-bar {
                 position: absolute;
@@ -83,23 +82,23 @@
                 background-color: $cl-primary-brighter;
                 padding: 0px 30px;
 
-                ul {
+                &>ul {
                     list-style: none;
                     width: 100%;
                     height: 100%;
                     display: flex;
                     align-items: center;
-                    
+
                     justify-content: flex-start;
                     gap: 25px;
 
-                    li {
+                    &>li {
                         height: 100%;
                         display: flex;
                         align-items: center;
                         color: black;
                         position: relative;
-                        
+
                         button {
                             border-bottom: 3px solid transparent;
                             border-top: 3px solid transparent;
@@ -119,7 +118,9 @@
 
             // comp/Friends
             .friends-container {
-                *{color: black}
+                * {
+                    color: black
+                }
 
                 .header {
                     margin-bottom: 20px;
@@ -131,7 +132,10 @@
 
                     .friends-count-container {
                         font-size: .8em;
-                        span:not(.count){margin-right: 6px}
+
+                        span:not(.count) {
+                            margin-right: 6px
+                        }
                     }
                 }
 
@@ -157,17 +161,23 @@
                         }
 
                         .profile-details {
-                            
-                            .name{font-weight: 700}
+
+                            .name {
+                                font-weight: 700
+                            }
+
                             .status-container {
                                 font-size: .8em;
-                                span:not(.status){
+
+                                span:not(.status) {
                                     margin-right: 6px;
                                 }
+
                                 span.status {
                                     &.status-online {
                                         color: #34C700;
                                     }
+
                                     &.status-offline {
                                         color: #FF0000;
                                     }
@@ -182,10 +192,61 @@
                             align-items: center;
                             justify-content: center;
                             gap: 11px;
+
                             .action {
+                                position: relative;
+
                                 &.add-to-room {
-                                    position: relative;
                                     top: 2px;
+                                }
+
+
+                                &.more {
+
+                                    &:hover {
+                                        .dropdown-menu {
+                                            display: block;
+                                        }
+                                    }
+
+                                    &>.dropdown-menu {
+                                        position: absolute;
+                                        display: none;
+                                        right: 0;
+                                        width: 130px;
+                                        top: 0;
+                                        background-color: transparent;
+                                        background-color: none;
+
+                                        &>ul {
+                                            width: 100%;
+                                            height: 100%;
+                                            display: flex;
+                                            flex-direction: column;
+                                            list-style: none;
+
+                                            li {
+                                                background-color: $cl-secondary;
+                                                padding: 10px;
+                                                width: 120px;
+                                                border-bottom: 1px solid rgba(255, 255, 255, 0.304);
+                                                cursor: pointer;
+
+                                                &:nth-last-child(1) {
+                                                    border-bottom: none;
+                                                }
+
+                                                &:hover {
+                                                    background-color: $cl-custom-orange;
+                                                }
+
+                                                button {
+                                                    color: white;
+                                                    width: 100%;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
 
                                 transform: scale(.9);
@@ -211,6 +272,7 @@
                 .create-room-btn {
                     background-color: $cl-custom-green;
                     margin-bottom: 17px;
+
                     svg {
                         transform: scale(.85);
                     }
@@ -243,7 +305,7 @@
 
                         cursor: pointer;
                     }
-                        
+
 
                     &.current-room {
                         background-color: $cl-custom-orange;
@@ -285,9 +347,11 @@
                 display: flex;
                 flex-direction: column;
                 padding-block: 20px;
+
                 .no-friend-requests {
                     text-align: center;
                 }
+
                 .friend-request {
                     padding: 20px 30px;
                     display: flex;
@@ -302,9 +366,11 @@
                         gap: 5px;
 
                         img {
-                            border-radius: 50%;;
+                            border-radius: 50%;
+                            ;
                             width: 65px;
                         }
+
                         .username {
                             font-size: .9em;
                         }
@@ -323,11 +389,12 @@
                             padding-block: 3px;
                             border-radius: 30px;
                             border: none;
-                            
+
                             &.accept {
                                 background-color: $cl-success;
 
                             }
+
                             &.reject {
                                 background-color: $cl-danger;
                             }
@@ -339,7 +406,7 @@
 
         }
 
-        
+
         .setting-container {
             position: absolute;
             left: 0;
@@ -351,7 +418,8 @@
             justify-content: flex-end;
             align-items: flex-start;
             padding: 18px;
-            border-radius: 50%;;
+            border-radius: 50%;
+            ;
             aspect-ratio: 1/1;
 
             button {
@@ -377,9 +445,13 @@
         display: grid;
         width: 100%;
         place-items: center;
-        span{color: black;}
+
+        span {
+            color: black;
+        }
 
     }
+
     .chat-screen {
         width: 100%;
         height: $default-height;
@@ -426,6 +498,7 @@
                         &:nth-child(1) {
                             transform: rotate(-45deg);
                         }
+
                         &:nth-child(2) {
                             transform: rotate(45deg);
                             transform-origin: center;
@@ -434,7 +507,9 @@
                 }
             }
 
-            *{color: black}
+            * {
+                color: black
+            }
 
             .inner-container {
                 width: 100%;
@@ -443,20 +518,21 @@
                 width: min(90%, 40%);
                 margin-inline: auto;
 
-                & > .header {
+                &>.header {
                     text-align: center;
                     text-transform: capitalize;
                     border-bottom: 1px solid rgba(0, 0, 0, 0.305);
                     padding-bottom: 20px;
                 }
 
-                & > .content-wrapper {
+                &>.content-wrapper {
                     display: flex;
                     flex-direction: column;
                     gap: 15px;
                     padding-block: 30px;
                     padding-inline: 5px;
                     font-size: .9em;
+
                     .basic-information {
                         display: flex;
                         flex-direction: column;
@@ -466,8 +542,10 @@
                         .item {
                             .key {
                                 font-weight: 500;
-                                margin-right: 5px;;
+                                margin-right: 5px;
+                                ;
                             }
+
                             .value {
                                 font-weight: regular;
                                 font-size: .9em;
@@ -481,7 +559,9 @@
                         padding-block: 40px;
                         gap: 10px;
 
-                        *{color:white}
+                        * {
+                            color: white
+                        }
 
                         .user {
                             position: relative;
@@ -498,13 +578,19 @@
                                 border-radius: 50%;
                                 margin-bottom: 10px;
                             }
+
                             .username {
                                 font-weight: 500;
                             }
+
                             .actions {
                                 margin-top: 25px;
                                 font-size: .6rem;
-                                a {text-decoration: none}
+
+                                a {
+                                    text-decoration: none
+                                }
+
                                 font-weight: 300;
                                 display: flex;
                                 flex-direction: column;
@@ -521,17 +607,21 @@
 
         }
 
-        & > .header,
-        & > .footer {
+        &>.header,
+        &>.footer {
             height: 100%;
             background-color: white;
         }
 
-        & > .header {
+        &>.header {
             position: relative;
             left: 0;
             top: 0;
-            *{color: black}
+
+            * {
+                color: black
+            }
+
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -546,7 +636,7 @@
             display: flex;
             align-items: center;
             padding: 10px 30px;
-            
+
             form {
                 display: flex;
                 align-items: center;
@@ -564,6 +654,7 @@
                         cursor: default;
                     }
                 }
+
                 textarea {
                     height: 100%;
                     width: 100%;
@@ -623,6 +714,7 @@
                         font-size: .7em;
                     }
                 }
+
                 .edit-message-container {
                     position: absolute;
                     z-index: 99;
@@ -634,6 +726,7 @@
                     padding: 10px 10px 5px 10px;
                     display: flex;
                     flex-direction: column;
+
                     textarea {
                         direction: ltr;
                         padding: 5px 10px;
@@ -646,30 +739,35 @@
                         height: 100%;
                         font-size: .8em;
                     }
+
                     .actions {
                         display: flex;
                         justify-content: space-between;
                         padding-inline: 5px;
                         margin-bottom: 3px;
-                        
-                        .cancel  {
+
+                        .cancel {
                             font-size: .6rem;
                             font-weight: regular;
                             text-align: left;
                             color: rgb(168, 167, 167);
+
                             &:hover {
                                 color: white;
                             }
                         }
+
                         .submit {
                             font-size: .6rem;
                             color: #7baffc;
+
                             &:disabled {
                                 color: #7baffc88;
                             }
                         }
                     }
                 }
+
                 .message {
                     background-color: $cl-message-bg;
                     max-width: 600px;
@@ -677,7 +775,7 @@
                     padding: 40px 50px;
                     position: relative;
                     font-size: .9em;
-                    
+
                     .message-text {
                         line-height: 30px;
                         font-weight: 500;
@@ -703,7 +801,7 @@
                         position: absolute;
 
                         &.dropdown-container {
-                            
+
                             right: 15px;
                             top: 15px;
                             box-sizing: content-box;
@@ -732,11 +830,11 @@
                                     width: 3px;
                                     aspect-ratio: 1 / 1;
                                     border-radius: 50%;
-                                    
+
                                 }
                             }
 
-                            .dropdown-menu {
+                            &>.dropdown-menu {
                                 display: none;
                                 min-width: 100px;
                                 position: absolute;
@@ -745,20 +843,21 @@
                                 box-sizing: content-box;
                                 padding-inline: 15px;
 
-                                ul {
+                                &>ul {
                                     display: flex;
                                     flex-direction: column;
                                     color: white;
                                     list-style: none;
                                     gap: 3px;
-                                    
-                                    li {
+
+                                    &>li {
                                         background-color: rgb(37, 37, 37);
                                         border-radius: 5px;
+
                                         &:hover {
                                             background-color: $cl-custom-orange;
                                         }
-                                        
+
                                         button {
                                             width: 150px;
                                             padding: 7px 30px;
@@ -786,13 +885,15 @@
                 &[itsme=true] {
 
                     direction: rtl;
-                    
+
                     .message {
                         background-color: $cl-my-message-bg;
+
                         .message-text {
                             direction: ltr;
                             color: $cl-my-message-text;
                         }
+
                         &::before {
                             background-color: $cl-my-message-bg;
                             right: 0;
@@ -813,6 +914,7 @@
                         &.dropdown-container {
                             left: 15px;
                             right: unset;
+
                             &:hover {
                                 .dropdown-container {
                                     span {
@@ -820,16 +922,17 @@
                                     }
                                 }
                             }
+
                             .dropdown-icon {
                                 span {
                                     background-color: #c3c3c3;
                                 }
-                             }
+                            }
 
-                             .dropdown-menu {
+                            &>.dropdown-menu {
                                 right: unset;
                                 left: 0;
-                             }
+                            }
                         }
                     }
                 }
