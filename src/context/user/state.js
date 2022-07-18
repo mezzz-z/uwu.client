@@ -17,11 +17,12 @@ const UserState = props => {
 	const [state, dispatch] = useReducer(userReducer, {
 		username: "",
 		email: "",
-		profilePicture: "",
+		profile_picture: "",
 		friends: [],
 		friendRequests: [],
 		videoCallTicket: null,
 		awaitFriends: true,
+		initialized: false,
 	});
 
 	const setFriends = friends => {
@@ -58,7 +59,7 @@ const UserState = props => {
 			payload: {
 				username,
 				email,
-				profilePicture,
+				profile_picture: profilePicture,
 			},
 		});
 	};

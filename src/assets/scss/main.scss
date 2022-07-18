@@ -38,6 +38,7 @@ input {
     outline: none;
     color: black;
 }
+
 .cover {
     position: absolute;
     left: 0;
@@ -48,6 +49,10 @@ input {
     background-color: transparent;
 }
 
+img {
+    object-fit: cover;
+}
+
 .float-corner {
     position: absolute;
     $default-space: 18px;
@@ -55,20 +60,27 @@ input {
 
     &.float-corner-bottom-left {
         bottom: $default-space;
-        left: $default-space;        
+        left: $default-space;
     }
+
     &.float-corner-bottom-right {
         bottom: $default-space;
-        right: $default-space;        
+        right: $default-space;
     }
+
     &.float-corner-top-left {
         top: $default-space;
-        left: $default-space;        
+        left: $default-space;
     }
+
     &.float-corner-top-right {
         top: $default-space;
-        right: $default-space;        
+        right: $default-space;
     }
+}
+
+.hide {
+    display: none;
 }
 
 // partials
@@ -79,3 +91,4 @@ input {
 @import 'partials/video-call';
 @import 'partials/invitation-modal';
 @import 'partials/add-user-to-room';
+@import 'partials/profile';

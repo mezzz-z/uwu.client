@@ -20,6 +20,7 @@
     .next {
         right: 30px;
     }
+
     .back {
         left: 30px;
     }
@@ -33,6 +34,7 @@
             font-size: .8em;
             margin-bottom: 60px;
         }
+
         .friends {
             flex-direction: column;
             display: flex;
@@ -48,18 +50,19 @@
                 display: flex;
                 align-items: center;
 
-                
+
                 input[type=checkbox] {
                     display: none;
 
-                    &:checked + label.friend::after {
+                    &:checked+label.friend::after {
                         background-color: $cl-custom-orange;
                     }
-                    &:checked + label.friend {
+
+                    &:checked+label.friend {
                         background-color: $cl-custom-orange-brighter;
                     }
                 }
-                
+
                 // label
                 .friend {
                     padding-inline: 30px;
@@ -68,9 +71,10 @@
                     height: 100%;
                     display: flex;
                     cursor: pointer;
-        
+
                     img {
-                        width: 45px;
+                        width: 50px;
+                        aspect-ratio: 1 / 1;
                         border-radius: 50%;
                         margin-right: 20px;
                     }
@@ -95,6 +99,7 @@
             }
         }
     }
+
     .page2 {
         display: flex;
         flex-direction: column;
@@ -108,7 +113,7 @@
             input {
                 width: 100%;
                 padding: 4px 20px;
-                
+
                 &[type=text] {
                     background-color: transparent;
                     margin-bottom: 6px;
@@ -122,7 +127,7 @@
                 }
             }
 
-            
+
             .members-list {
 
                 font-size: .8em;
@@ -136,6 +141,7 @@
                     margin-block: 10px;
                     margin-bottom: 10px;
                     position: relative;
+
                     &::after {
                         position: absolute;
                         content: "members";
@@ -149,6 +155,7 @@
                         color: rgba(255, 255, 255, 0.543);
                     }
                 }
+
                 .member {
                     color: rgb(161, 161, 250);
                 }

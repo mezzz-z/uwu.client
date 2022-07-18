@@ -60,7 +60,6 @@ const ChatRoom = () => {
 		roomsAPI
 			.getRoomMessages(currentRoom.room_id, auth.token)
 			.then(({ data }) => {
-				console.log(data.messages);
 				newMessage.current = true;
 				setMessages(data.messages, data.isFinished);
 			})

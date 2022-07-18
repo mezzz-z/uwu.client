@@ -151,11 +151,11 @@
                         height: 80px;
                         display: flex;
                         align-items: center;
-                        gap: 10px;
+                        gap: 20px;
                         font-size: .9em;
 
                         .profile-picture {
-                            height: 90px;
+                            height: 75px;
                             aspect-ratio: 1 / 1;
                             border-radius: 50%;
                         }
@@ -575,6 +575,7 @@
 
                             img.profile-picture {
                                 width: 70px;
+                                aspect-ratio: 1 / 1;
                                 border-radius: 50%;
                                 margin-bottom: 10px;
                             }
@@ -705,6 +706,7 @@
 
                     .profile-picture {
                         height: $user-profile-height;
+                        aspect-ratio: 1 / 1;
                         border-radius: 50%;
                     }
 

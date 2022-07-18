@@ -17,8 +17,9 @@ const userReducer = (state, action) => {
 				...state,
 				username: action.payload.username,
 				email: action.payload.email,
-				profilePicture: action.payload.profilePicture,
+				profile_picture: action.payload.profile_picture,
 				userId: action.payload.userId,
+				initialized: true,
 			};
 
 		case SET_FRIENDS:

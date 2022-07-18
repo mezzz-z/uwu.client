@@ -49,6 +49,11 @@ input {
   background-color: transparent;
 }
 
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .float-corner {
   position: absolute;
   font-size: .8em;
@@ -72,6 +77,10 @@ input {
 .float-corner.float-corner-top-right {
   top: 18px;
   right: 18px;
+}
+
+.hide {
+  display: none;
 }
 
 #login-signup {
@@ -395,12 +404,12 @@ input {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 10px;
+  gap: 20px;
   font-size: .9em;
 }
 
 #home .sidebar .sidebar-components-container .friends-container .friends .friend .profile-picture {
-  height: 90px;
+  height: 75px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
 }
@@ -871,6 +880,7 @@ input {
 
 #home .chat-screen #room-info .inner-container > .content-wrapper .users .user img.profile-picture {
   width: 70px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   margin-bottom: 10px;
 }
@@ -1041,6 +1051,7 @@ input {
 
 #home .chat-screen .main-container .message-container .user .profile-picture {
   height: 60px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
 }
 
@@ -1382,7 +1393,8 @@ input {
 }
 
 .create-room-container .page1 .friends .friend-container .friend img {
-  width: 45px;
+  width: 50px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   margin-right: 20px;
 }
@@ -1704,5 +1716,119 @@ input {
           transform: translateY(-50%);
   font-size: .5em;
   color: rgba(255, 255, 255, 0.547);
+}
+
+#profile {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+#profile .profile-container {
+  -webkit-transition: 600ms ease-in-out;
+  transition: 600ms ease-in-out;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  background-color: #E45E12;
+  max-width: 700px;
+  padding: 90px 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 60px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  -webkit-box-shadow: 20px 15px 0px #b54b0e, 40px 30px 0px #85370b, 50px 40px 0px #562407;
+          box-shadow: 20px 15px 0px #b54b0e, 40px 30px 0px #85370b, 50px 40px 0px #562407;
+}
+
+#profile .profile-container .go-back {
+  position: absolute;
+  left: 10px;
+  top: -15px;
+  -webkit-transform: translate(0%, -100%);
+          transform: translate(0%, -100%);
+  color: black;
+  font-size: .8em;
+  text-decoration: none;
+}
+
+#profile .profile-container .edit-profile {
+  right: 30px;
+  color: #0e3f54;
+}
+
+#profile .profile-container .edit-profile:hover {
+  color: #232323;
+}
+
+#profile .profile-container .profile-information-label {
+  color: rgba(255, 239, 239, 0.321);
+  left: 25px;
+}
+
+#profile .profile-container .profile-picture-container {
+  width: 250px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+
+#profile .profile-container .profile-picture-container img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+#profile .profile-container .profile-picture-container form label {
+  font-weight: 700;
+  font-size: .7em;
+  color: white;
+  padding: 3px 20px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#profile .profile-container .profile-information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+  width: 300px;
+}
+
+#profile .profile-container .profile-information .username {
+  font-weight: 600;
+  font-size: 1.7em;
+}
+
+#profile .profile-container .profile-information .bio {
+  font-size: .9em;
+  font-weight: 400;
+  width: 100%;
+  line-height: 1.8em;
 }
 /*# sourceMappingURL=main.css.map */
