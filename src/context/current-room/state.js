@@ -16,7 +16,7 @@ const CurrentRoomState = props => {
 
 	const setCurrentRoom = room => {
 		setCurrentRoomState({
-			...currentRoomState,
+			...initial,
 			...room,
 			awaitFetchRoom: false,
 		});
