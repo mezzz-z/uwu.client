@@ -15,7 +15,7 @@ const UserDataRequired = ({ children }) => {
 	const fetchUser = async () => {
 		try {
 			const { data } = await usersAPI.getCurrentUser(token);
-			setUser(data.user.username, data.user.email, data.user.profile_picture);
+			setUser(data.user);
 		} catch (error) {
 			console.log(error);
 		}

@@ -9,10 +9,8 @@ const AuthRequired = ({ children }) => {
 	const { socketState, submitUserId } = useSocket();
 
 	useEffect(() => {
-		// submit user if he's not submitted
 		if (isLoggedIn && !socketState.submittedList.userId) {
 			socketState.socket.emit("global/submit-user-id", userId);
-
 			socketState.socket.on("global/user-id-submitted", () => {
 				submitUserId();
 				console.log(`user submitted, id(${userId})`);

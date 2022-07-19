@@ -39,6 +39,10 @@ input {
   color: black;
 }
 
+textarea {
+  resize: none;
+}
+
 .cover {
   position: absolute;
   left: 0;
@@ -226,6 +230,18 @@ img {
   display: -ms-flexbox;
   display: flex;
   gap: 3vw;
+}
+
+#home .float-cover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: white;
+  z-index: 99999999999;
+  -webkit-transition: 700ms ease-in-out;
+  transition: 700ms ease-in-out;
+  width: 100%;
+  height: 100%;
 }
 
 #home .sidebar {
@@ -1718,8 +1734,21 @@ img {
   color: rgba(255, 255, 255, 0.547);
 }
 
-#profile {
-  width: 100%;
+.slider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: .4s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+.slider .float-component {
+  width: 100vw;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.slider .profile {
   height: 100vh;
   background-color: white;
   display: -ms-grid;
@@ -1728,9 +1757,9 @@ img {
   position: relative;
 }
 
-#profile .profile-container {
-  -webkit-transition: 600ms ease-in-out;
-  transition: 600ms ease-in-out;
+.slider .profile .profile-container {
+  -webkit-transition: 400ms ease-in;
+  transition: 400ms ease-in;
   -webkit-transform-origin: center;
           transform-origin: center;
   background-color: #E45E12;
@@ -1751,7 +1780,7 @@ img {
           box-shadow: 20px 15px 0px #b54b0e, 40px 30px 0px #85370b, 50px 40px 0px #562407;
 }
 
-#profile .profile-container .go-back {
+.slider .profile .profile-container .go-back {
   position: absolute;
   left: 10px;
   top: -15px;
@@ -1762,21 +1791,21 @@ img {
   text-decoration: none;
 }
 
-#profile .profile-container .edit-profile {
+.slider .profile .profile-container .edit-profile {
   right: 30px;
   color: #0e3f54;
 }
 
-#profile .profile-container .edit-profile:hover {
+.slider .profile .profile-container .edit-profile:hover {
   color: #232323;
 }
 
-#profile .profile-container .profile-information-label {
+.slider .profile .profile-container .profile-information-label {
   color: rgba(255, 239, 239, 0.321);
   left: 25px;
 }
 
-#profile .profile-container .profile-picture-container {
+.slider .profile .profile-container .profile-picture-container {
   width: 250px;
   aspect-ratio: 1 / 1;
   position: relative;
@@ -1793,13 +1822,56 @@ img {
   gap: 10px;
 }
 
-#profile .profile-container .profile-picture-container img {
+.slider .profile .profile-container .profile-picture-container.loading::after {
+  border-radius: 50%;
+  background-color: white;
+  z-index: 99;
+  position: absolute;
+  content: 'Loading...';
+  color: black;
+  font-size: .9em;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-animation: loading 1s linear infinite alternate;
+          animation: loading 1s linear infinite alternate;
+}
+
+@-webkit-keyframes loading {
+  from {
+    background-color: white;
+    color: black;
+  }
+  to {
+    color: rgba(0, 0, 0, 0.577);
+    background-color: #e6e6e6;
+  }
+}
+
+@keyframes loading {
+  from {
+    background-color: white;
+    color: black;
+  }
+  to {
+    color: rgba(0, 0, 0, 0.577);
+    background-color: #e6e6e6;
+  }
+}
+
+.slider .profile .profile-container .profile-picture-container img {
   border-radius: 50%;
   width: 100%;
   height: 100%;
 }
 
-#profile .profile-container .profile-picture-container form label {
+.slider .profile .profile-container .profile-picture-container form label {
   font-weight: 700;
   font-size: .7em;
   color: white;
@@ -1808,7 +1880,11 @@ img {
   cursor: pointer;
 }
 
-#profile .profile-container .profile-information {
+.slider .profile .profile-container .profile-picture-container form label.disabled {
+  color: rgba(255, 255, 255, 0.473);
+}
+
+.slider .profile .profile-container .profile-information {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1820,15 +1896,115 @@ img {
   width: 300px;
 }
 
-#profile .profile-container .profile-information .username {
+.slider .profile .profile-container .profile-information .username {
   font-weight: 600;
   font-size: 1.7em;
 }
 
-#profile .profile-container .profile-information .bio {
+.slider .profile .profile-container .profile-information .bio {
   font-size: .9em;
   font-weight: 400;
   width: 100%;
   line-height: 1.8em;
+}
+
+.slider .edit-profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+.slider .edit-profile .modal-container {
+  width: 300px;
+}
+
+.slider .edit-profile .edit-profile-container {
+  position: relative;
+  width: 300px;
+  background-color: #232323;
+  -webkit-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.525), -1px -1px 20px #E45E12;
+          box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.525), -1px -1px 20px #E45E12;
+}
+
+.slider .edit-profile .edit-profile-container .go-back {
+  position: absolute;
+  left: 2px;
+  top: -15px;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.slider .edit-profile .edit-profile-container form {
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 14px;
+  padding-top: 30px;
+}
+
+.slider .edit-profile .edit-profile-container form h3.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.slider .edit-profile .edit-profile-container form .form-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: .7em;
+  gap: 6px;
+}
+
+.slider .edit-profile .edit-profile-container form .form-item input,
+.slider .edit-profile .edit-profile-container form .form-item textarea {
+  width: 100%;
+  background-color: #1b1b1b;
+  border: 1px solid rgba(228, 94, 18, 0.5);
+  outline: none;
+  color: white;
+  padding: 7px 10px;
+  font-size: .9em;
+}
+
+.slider .edit-profile .edit-profile-container form .form-item input:focus,
+.slider .edit-profile .edit-profile-container form .form-item textarea:focus {
+  border: 1px solid #E45E12;
+}
+
+.slider .edit-profile .edit-profile-container form .form-item textarea {
+  height: 100px;
+}
+
+.slider .edit-profile .edit-profile-container form .form-item button {
+  background-color: #E45E12;
+  border: none;
+  padding: 20px;
+  font-size: .7em;
+}
+
+.slider .edit-profile .edit-profile-container form .form-item label {
+  color: rgba(228, 94, 18, 0.7);
 }
 /*# sourceMappingURL=main.css.map */

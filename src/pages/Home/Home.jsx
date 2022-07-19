@@ -2,7 +2,7 @@ import Friends from "./Friends.jsx";
 import FriendRequests from "./FriendRequests";
 import Rooms from "./Rooms.jsx";
 import ChatRoom from "./ChatRoom.jsx";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useCurrentRoom, useSocket } from "../../context/index.js";
 import CreateRoom from "./CreateRoom.jsx";
@@ -12,19 +12,35 @@ import VideoCallInvitation from "./Invitation.jsx";
 import SearchBar from "./SearchBar.jsx";
 import AddUserToRoom from "./AddUserToRoom.jsx";
 
+const floatCoverAnimation = {
+	initial: {
+		transform: "translateX(0%)",
+	},
+	start: {
+		transform: "translateX(-120%)",
+	},
+	end: {
+		transform: "translateX(0%)",
+	},
+};
+
 const Home = () => {
 	const [currentSidebarComponent, setCurrentSidebarComponent] =
 		useState("friends");
 	const currentActiveComponent = useRef();
 
-	// modals States
+	const [floatCoverStyle, setFloatCoverStyle] = useState(
+		floatCoverAnimation.initial
+	);
+
 	const [showCreateRoomModal, setShowCreateRoomModal] = useState(false);
 	const [showAddUserToRoomModal, setShowAddUserToRoomModal] = useState({
 		showModal: false,
 		userId: "",
 	});
 
-	// useContext
+	const navigate = useNavigate();
+
 	const { currentRoom } = useCurrentRoom();
 	const { socketState, clearInvitation, createInvitation, submitCurrentRoom } =
 		useSocket();
@@ -37,9 +53,16 @@ const Home = () => {
 		currentActiveComponent.current.classList.add("active");
 	};
 
+	const handleNavigation = path => {
+		setFloatCoverStyle(floatCoverAnimation.end);
+		setTimeout(() => navigate(path), 700);
+	};
+
 	// set socket event listeners
 	useEffect(() => {
 		const { socket } = socketState;
+
+		setFloatCoverStyle(floatCoverAnimation.start);
 
 		socket.on("video-call/incoming-invite", ({ senderId, invitationCode }) => {
 			createInvitation(senderId, invitationCode);
@@ -55,6 +78,8 @@ const Home = () => {
 
 	return (
 		<main id='home' className='container'>
+			<div className='float-cover' style={{ ...floatCoverStyle }}></div>
+			<div className='animated-cover'></div>
 			<section className='sidebar'>
 				<SearchBar />
 
@@ -102,7 +127,10 @@ const Home = () => {
 				</article>
 
 				<div className='setting-container'>
-					<Link to='/my-profile' className='setting not-button'>
+					<button
+						onClick={() => handleNavigation("/my-profile")}
+						className='setting not-button'
+					>
 						<svg
 							width='22'
 							height='24'
@@ -124,7 +152,7 @@ const Home = () => {
 								fill='white'
 							/>
 						</svg>
-					</Link>
+					</button>
 				</div>
 			</section>
 

@@ -1,19 +1,19 @@
-import { useUser, useAuth } from "../context";
+import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
-import noProfile from "../assets/images/no-profile.png";
-import { convertImageToBase64 } from "../helpers/toBase64.js";
-import usersAPI from "../api/users.js";
+import noProfile from "../../assets/images/no-profile.png";
+import { convertImageToBase64 } from "../../helpers/toBase64.js";
+import usersAPI from "../../api/users.js";
 import { useNavigate } from "react-router-dom";
 
-const animationDuration = 600;
+const profileContainerAnimationDuration = 400;
 
-const animation = {
+const profileContainerAnimation = {
 	initial: {
-		transform: "scale(0)",
+		transform: "scale(.3) translate(-40%, -90%)",
 		opacity: 0,
 	},
 	start: {
-		transform: "scale(1)",
+		transform: "scale(1) translate(0%, 0%)",
 		opacity: 1,
 	},
 	end: {
@@ -22,16 +22,18 @@ const animation = {
 	},
 };
 
-const Profile = () => {
-	const {
-		userState: { username, profile_picture },
-	} = useUser();
-
+const ProfileInformation = ({
+	nextPage,
+	currentUser: { username, bio, profile_picture },
+}) => {
 	const {
 		auth: { token },
 	} = useAuth();
 
-	const [currentStyle, setCurrentStyle] = useState(animation.initial);
+	const [profileContainerStyle, setProfileContainerStyle] = useState(
+		profileContainerAnimation.initial
+	);
+	const [uploadingImage, setUploadingImage] = useState(false);
 	const [currentProfilePicture, setCurrentProfilePicture] = useState(
 		profile_picture || noProfile
 	);
@@ -42,41 +44,47 @@ const Profile = () => {
 		if (!e.target.files || !e.target.files[0]) return;
 		const maxSize = 5 * 1024 * 1024;
 		const image = e.target.files[0];
-
 		if (image.size > maxSize) return;
 
+		setUploadingImage(true);
 		try {
 			const encodedImage = await convertImageToBase64(image);
 			const { data } = await usersAPI.updateProfilePicture(encodedImage, token);
 			setCurrentProfilePicture(data.updatedProfilePicture);
+			setUploadingImage(false);
 		} catch (error) {
 			console.log(error);
+			setUploadingImage(false);
 		}
 	};
 
 	const handleGoingBack = () => {
-		setCurrentStyle(animation.end);
+		setProfileContainerStyle(profileContainerAnimation.end);
 
 		setTimeout(() => {
 			navigate("/home");
-		}, animationDuration + 200);
+		}, profileContainerAnimationDuration + 100);
 	};
 
 	useEffect(() => {
-		setCurrentStyle(animation.start);
+		setProfileContainerStyle(profileContainerAnimation.start);
 	}, []);
 
 	return (
-		<section id='profile'>
-			<div className='profile-container' style={currentStyle}>
+		<section className='profile float-component'>
+			<div className='profile-container' style={profileContainerStyle}>
 				<button
+					disabled={uploadingImage ? true : false}
 					onClick={handleGoingBack}
 					to={"/home"}
 					className='go-back not-button'
 				>
 					go back
 				</button>
-				<button className='not-button edit-profile float-corner float-corner-top-right'>
+				<button
+					onClick={() => nextPage()}
+					className='not-button edit-profile float-corner float-corner-top-right'
+				>
 					Edit profile
 				</button>
 
@@ -86,13 +94,13 @@ const Profile = () => {
 
 				<div className='profile-information'>
 					<span className='username'>{username}</span>
-					<p className='bio'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-						dolorum aspernatur non iure quas pariatur similique sunt labore,
-						optio corporis!
-					</p>
+					<p className='bio'>{bio}</p>
 				</div>
-				<div className='profile-picture-container'>
+				<div
+					className={`profile-picture-container  ${
+						uploadingImage && "loading"
+					}`}
+				>
 					<img
 						src={currentProfilePicture}
 						className='profile-picture'
@@ -105,8 +113,14 @@ const Profile = () => {
 							name='profile-picture'
 							id='profile-picture'
 							onChange={uploadImage}
+							disabled={uploadingImage ? true : false}
 						/>
-						<label htmlFor='profile-picture'>change</label>
+						<label
+							htmlFor='profile-picture'
+							className={uploadingImage ? "disabled" : undefined}
+						>
+							change
+						</label>
 					</form>
 				</div>
 			</div>
@@ -114,4 +128,4 @@ const Profile = () => {
 	);
 };
 
-export default Profile;
+export default ProfileInformation;

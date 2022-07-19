@@ -36,6 +36,14 @@ class Users {
 			}
 		);
 	}
+
+	async updateUserProfile(username, bio, accessToken) {
+		return await this.axios.patch(
+			"/current/",
+			{ username, bio },
+			{ headers: { "authorization": "Bearer " + accessToken } }
+		);
+	}
 }
 
 export default new Users();

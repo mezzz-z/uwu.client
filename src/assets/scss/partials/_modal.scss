@@ -10,11 +10,18 @@
     }
 
     &.success {
-        span{color: $cl-success;}
+        span {
+            color: $cl-success;
+        }
+
         background-color: $cl-success-bg;
     }
+
     &.danger {
-        span{color: $cl-danger;}
+        span {
+            color: $cl-danger;
+        }
+
         background-color: $cl-danger-bg;
     }
 }

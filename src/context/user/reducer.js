@@ -15,10 +15,7 @@ const userReducer = (state, action) => {
 		case SET_USER:
 			return {
 				...state,
-				username: action.payload.username,
-				email: action.payload.email,
-				profile_picture: action.payload.profile_picture,
-				userId: action.payload.userId,
+				...action.payload,
 				initialized: true,
 			};
 

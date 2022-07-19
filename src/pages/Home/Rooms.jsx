@@ -31,6 +31,8 @@ const Rooms = ({ setShowCreateRoomModal }) => {
 
 			setCurrentRoom(room);
 
+			// TODO wrap the room in context
+			// TODO remove notifications after current room messages fetched
 			setRoomsState(currentState => {
 				return {
 					...currentState,

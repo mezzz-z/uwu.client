@@ -18,6 +18,7 @@ const UserState = props => {
 		username: "",
 		email: "",
 		profile_picture: "",
+		bio: "",
 		friends: [],
 		friendRequests: [],
 		videoCallTicket: null,
@@ -53,14 +54,10 @@ const UserState = props => {
 		dispatch({ type: REMOVE_FRIEND, payload: userId });
 	};
 
-	const setUser = (username, email, profilePicture) => {
+	const setUser = user => {
 		dispatch({
 			type: SET_USER,
-			payload: {
-				username,
-				email,
-				profile_picture: profilePicture,
-			},
+			payload: { ...user },
 		});
 	};
 
