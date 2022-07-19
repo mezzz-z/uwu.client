@@ -6,22 +6,24 @@ import {
 	VideoCallRoom,
 	Profile,
 	NotFound,
-} from "./pages/index.js";
+} from "../pages/index.js";
+
+import routes from "./routes";
 
 import {
 	UserDataRequired,
 	AuthRequired,
 	UnAuthRequired,
-} from "./components/middleWare/index.js";
+} from "../components/middleWare/index.js";
 
-import { CurrentRoomState } from "./context/index";
+import { CurrentRoomState } from "../context/index";
 
 const Router = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route
-					path='/signup'
+					path={routes.signup.path}
 					element={
 						<UnAuthRequired>
 							<Signup />
@@ -29,7 +31,7 @@ const Router = () => {
 					}
 				/>
 				<Route
-					path='/login'
+					path={routes.login.path}
 					element={
 						<UnAuthRequired>
 							<Login />
@@ -38,7 +40,7 @@ const Router = () => {
 				/>
 
 				<Route
-					path='/home'
+					path={routes.home.path}
 					element={
 						<AuthRequired>
 							<UserDataRequired>
@@ -50,10 +52,10 @@ const Router = () => {
 					}
 				/>
 
-				<Route path='/' element={<Navigate to={"/login"} />} />
+				<Route path='/' element={<Navigate to={routes.login.path} />} />
 
 				<Route
-					path='/video-call/:roomId'
+					path={`${routes.videoCall.path}/:roomId`}
 					element={
 						<AuthRequired>
 							<VideoCallRoom />
@@ -62,7 +64,7 @@ const Router = () => {
 				/>
 
 				<Route
-					path='/my-profile'
+					path={routes.profile.path}
 					element={
 						<AuthRequired>
 							<UserDataRequired>

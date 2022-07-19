@@ -5,6 +5,7 @@ import authAPI from "../api/auth.js";
 import useFormModal from "../hooks/useFormModal";
 import Modal from "../components/FormModal.jsx";
 import { Link } from "react-router-dom";
+import routes from "../router/routes.js";
 
 const Login = () => {
 	const { loggedIn, setIsModalOpen } = useAuth();
@@ -69,7 +70,8 @@ const Login = () => {
 					</div>
 					<div className='form-item form-item-footer'>
 						<span>
-							Don't have an account ? <Link to='/signup'>signup</Link>
+							Don't have an account ?{" "}
+							<Link to={routes.signup.path}>signup</Link>
 						</span>
 					</div>
 				</form>

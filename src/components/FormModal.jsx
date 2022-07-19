@@ -1,17 +1,13 @@
+const FormModal = ({ modalClassName, modalContent, removeModal }) => {
+	const className = `modal-container ${modalClassName}`;
 
-const FormModal = ({modalClassName, modalContent, removeModal}) => {
+	removeModal(3000);
 
-    const className = `modal-container ${modalClassName}`;
-    
+	return (
+		<section className={className}>
+			<span>{modalContent}</span>
+		</section>
+	);
+};
 
-    removeModal(3000)
-
-    return(
-        <section className={className}>
-            <span>{modalContent}</span>
-        </section>
-    )
-}
-
-
-export default FormModal
+export default FormModal;

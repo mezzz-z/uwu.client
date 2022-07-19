@@ -1,3 +1,4 @@
+import routes from "../../router/routes.js";
 import { useAuth } from "../../context";
 import { useState, useEffect } from "react";
 import noProfile from "../../assets/images/no-profile.png";
@@ -62,7 +63,7 @@ const ProfileInformation = ({
 		setProfileContainerStyle(profileContainerAnimation.end);
 
 		setTimeout(() => {
-			navigate("/home");
+			navigate(routes.home.path);
 		}, profileContainerAnimationDuration + 100);
 	};
 

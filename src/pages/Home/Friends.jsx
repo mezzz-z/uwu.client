@@ -4,6 +4,7 @@ import friendsAPI from "../../api/friends.js";
 import { useEffect } from "react";
 import { useUser, useSocket, useAuth } from "../../context/index.js";
 import { v4 as uuidv4 } from "uuid";
+import routes from "../../router/routes.js";
 
 const Friends = ({ setShowAddUserToRoomModal }) => {
 	const { auth } = useAuth();
@@ -31,7 +32,8 @@ const Friends = ({ setShowAddUserToRoomModal }) => {
 			invitationCode: videoCallRoomId,
 		});
 		socket.on("video-call/invitation-result", data => {
-			if (data.success) return navigate(`/video-call/${videoCallRoomId}`);
+			if (data.success)
+				return navigate(`${routes.videoCall.path}/${videoCallRoomId}`);
 			console.log("user is busy");
 		});
 	};

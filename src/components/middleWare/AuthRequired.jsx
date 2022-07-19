@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAuth, useSocket } from "../../context/index";
 import { Navigate } from "react-router-dom";
+import routes from "../../router/routes.js";
 
 const AuthRequired = ({ children }) => {
 	const {
@@ -27,7 +28,7 @@ const AuthRequired = ({ children }) => {
 			<h3>Loading...</h3>
 		)
 	) : (
-		<Navigate to='/login' />
+		<Navigate to={routes.login.path} />
 	);
 };
 
